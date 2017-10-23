@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="commons-cli-1.4">
+    <CLASSES>
+      <root url="jar://C:/Program Files (x86)/Java/commons-cli-1.4/commons-cli-1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/commons-cli-1.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
