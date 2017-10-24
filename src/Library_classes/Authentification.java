@@ -2,15 +2,15 @@ package Library_classes;
 
 import org.apache.commons.cli.*;
 
-public class Autentification
+public class Authentification
 {
-    public final static String Login = "Login";
-    public final static String Password = "Password";
+    private final static String Login = "Login";
+    private final static String Password = "Password";
 
     private Options options;
     private CommandLine line;
 
-    public Autentification()
+    public Authentification()
     {
         options = new Options();
         options.addOption(Option.builder("l")
@@ -31,34 +31,47 @@ public class Autentification
                 .build());
     }
 
+    private String PrintHelp()
+    {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
+                options, "Разработано: Bullet1395");
+        return formatter.toString();
+    }
+
     public void Parse(String[] args) throws Exception
     {
-        CommandLineParser parser = new DefaultParser();
-        line = parser.parse(options, args);
-        if (line.hasOption("help"))
+        try
         {
-            throw new Exception("Print help and exit");
+            CommandLineParser parser = new DefaultParser();
+            line = parser.parse(options, args);
+            if (line.hasOption("help"))
+            {
+                throw new Exception(PrintHelp());
+            }
+        }
+        catch(Exception e)
+        {
         }
     }
 
     private String getOption(String optionName)
     {
-        String val = "";
-        if( line.hasOption( optionName ) )
+        String opt = "";
+        if( line.hasOption(optionName))
         {
             try
             {
-                val = line.getOptionValue( optionName );
-                //val = val &gt; 0 ? val : -val;
+                opt = line.getOptionValue( optionName );
             }
             catch (NumberFormatException e)
             {
             }
-            return val;
+            return opt;
         }
         else
         {
-            return val;
+            return opt;
         }
     }
 
@@ -70,13 +83,6 @@ public class Autentification
     public String getPassword()
     {
         return getOption(Password);
-    }
-
-    public void printHelp()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
-                options, "Разработано: Bullet1395");
     }
 }
 

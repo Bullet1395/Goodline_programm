@@ -19,6 +19,13 @@ public class Users
         return bytes.toString();
     }
 
+    public  Users()
+    {
+        this.Login = "Login";
+        this.Salt = "Salt";
+        this.Password = "Password";
+    }
+
     public Users(String Login, String Password) throws NoSuchAlgorithmException
     {
         this.Login = Login;
@@ -39,5 +46,20 @@ public class Users
     public String GetSalt()
     {
         return this.Salt;
+    }
+
+    public void SetSalt(String Salt)
+    {
+        this.Salt = Salt;
+    }
+
+    public void SetLogin(String Login)
+    {
+        this.Login = Login;
+    }
+
+    public void SetPassword(String Password) throws NoSuchAlgorithmException
+    {
+        this.Password = EncryptedPass.hashPassword(Password, Salt);
     }
 }
