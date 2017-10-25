@@ -7,6 +7,13 @@ public class Resources {
     private Enum<Roles> Role;
     private String Path;
 
+    public Resources(String User, Enum<Roles> Role, String Path)
+    {
+        this.User = User;
+        this.Role = Role;
+        this.Path = Path;
+    }
+
     public String GetUser(){
         return this.User;
     }

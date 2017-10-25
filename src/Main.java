@@ -1,4 +1,6 @@
+import Enums.Roles;
 import Library_classes.Authentification;
+import Library_classes.Resources;
 import Library_classes.Users;
 
 import java.util.ArrayList;
@@ -14,6 +16,12 @@ public class Main {
         Users User_Read = new Users("User_Read", "123_r");
         Users User_Write = new Users("User_Write", "123_w");
         Users User_Execute = new Users("User_Execute", "123_e");
+
+        Resources res_1 = new Resources("User_Read", Roles.READ, "C.R.RR");
+        Resources res_2 = new Resources("User_Read", Roles.READ, "C.W.WR.R");
+        Resources res_3 = new Resources("User_Write", Roles.WRITE, "C.W.WR");
+        Resources res_4 = new Resources("User_Write", Roles.WRITE, "C.R.RR.W");
+        Resources res_5 = new Resources("User_Execute", Roles.EXECUTE, "C.E.ER");
 
         List<Users> users = new ArrayList<>();
         users.add(User_Read);
