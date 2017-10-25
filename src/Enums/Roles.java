@@ -1,6 +1,5 @@
 package Enums;
 
-public enum Roles
-{
-
+public enum Roles {
+    READ, WRITE, EXECUTE
 }

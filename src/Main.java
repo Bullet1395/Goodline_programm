@@ -1,8 +1,6 @@
 import Library_classes.Authentification;
 import Library_classes.Users;
-import Security.EncryptedPass;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,21 +23,19 @@ public class Main {
         Users aut_user;
         String aut_log = aut.getLogin();
 
-        for (Users u : users)
-        {
+        for (Users u : users) {
             String userLogin = u.GetLogin();
-            if (aut_log.equals(userLogin))
-            {
+            if (aut_log.equals(userLogin)) {
                 aut_user = new Users();
                 aut_user.SetLogin(aut_log);
                 aut_user.SetSalt(u.GetSalt());
                 aut_user.SetPassword(aut.getPassword());
-                if (aut_user.GetPassword().equals(u.GetPassword()))
-                {
+                if (aut_user.GetPassword().equals(u.GetPassword())) {
                     System.exit(0);
                 } else
                     System.exit(2);
-            } if (users.indexOf(u) == (users.size()-1))
+            }
+            if (users.indexOf(u) == (users.size() - 1))
                 System.exit(1);
         }
     }
