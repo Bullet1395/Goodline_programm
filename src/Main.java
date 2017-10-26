@@ -7,12 +7,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
-        /*Authentification authen = new Authentification();
-        authen.Parse(args);
-        Authorization authoriz = new Authorization();
-        authoriz.Parse(args);*/
-
         ParseCMD cmd_args = new ParseCMD();
         cmd_args.Parse(args);
 
@@ -26,7 +20,7 @@ public class Main {
         Resources res_4 = new Resources("User_Write", Roles.WRITE, "C.R.RR.W");
         Resources res_5 = new Resources("User_Execute", Roles.EXECUTE, "C.E.ER");
 
-        List<Users> users = new ArrayList<>();
+        ArrayList<Users> users = new ArrayList<>();
         users.add(User_Read);
         users.add(User_Write);
         users.add(User_Execute);
@@ -38,28 +32,9 @@ public class Main {
         resources.add(res_4);
         resources.add(res_5);
 
-        Users aut_user = new Users();
-        String aut_log = ParseCMD.getLogin();
-
-        outer: for (Users u : users) {
-            String userLogin = u.GetLogin();
-            if (aut_log.equals(userLogin)) {
-                //aut_user = new Users();
-                aut_user.SetLogin(aut_log);
-                aut_user.SetSalt(u.GetSalt());
-                aut_user.SetPassword(ParseCMD.getPassword());
-                if (aut_user.GetPassword().equals(u.GetPassword())) {
-                    if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
-                        break outer;
-                    System.exit(0);
-                } else
-                    System.exit(2);
-            }
-            if (users.indexOf(u) == (users.size() - 1))
-                System.exit(1);
-        }
+        Users Authentification_User = Users.Log_IN(users);
 
         if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
-            Resources.CheckParam(aut_user, resources, ParseCMD.getRole(), ParseCMD.getPath());
+            Resources.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
     }
 }
