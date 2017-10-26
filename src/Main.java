@@ -34,7 +34,16 @@ public class Main {
 
         Users Authentification_User = Authentification.Log_IN(users);
 
-        if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path"))
+
+
+        if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path")) {
             Authorization.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
+            if (ParseCMD.checkOption("ds") && ParseCMD.checkOption("de") && ParseCMD.checkOption("v")) {
+                Accaunting.CheckParam(ParseCMD.getDateIn(), ParseCMD.getDateOut(), ParseCMD.getVolume());
+                System.exit(0);
+            }
+            else System.exit(0);
+        }
+
     }
 }

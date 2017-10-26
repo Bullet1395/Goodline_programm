@@ -15,7 +15,7 @@ public class Authorization {
                 if (CheckInRole(Role)) {
                     if (CheckPathRole(Path, res)) {
                         if (Roles.valueOf(Role) == res.GetRole()) {
-                            System.exit(0);
+                            return;
                         } else if (iter == iter2) System.exit(4);
                     } else if (iter == iter2) System.exit(4);
                 }

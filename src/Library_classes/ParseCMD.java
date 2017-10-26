@@ -7,12 +7,17 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 
+import java.util.Date;
+
 public class ParseCMD {
 
     private final static String Login = "login";
     private final static String Password = "password";
     private final static String Role = "role";
     private final static String Path = "path";
+    private final static String DateIn= "ds";
+    private final static String DateOut = "de";
+    private final static String Volume = "volume";
 
     private Options options;
     private static CommandLine line;
@@ -47,6 +52,24 @@ public class ParseCMD {
                 .hasArg()
                 .argName("PATH")
                 .build());
+        options.addOption(Option.builder("ds")
+                .longOpt(DateIn)
+                .desc("Дата входа")
+                .hasArg()
+                .argName("DATE IN")
+                .build());
+        options.addOption(Option.builder("de")
+                .longOpt(DateOut)
+                .desc("Дата выхода")
+                .hasArg()
+                .argName("DATE OUT")
+                .build());
+        options.addOption(Option.builder("v")
+                .longOpt(Volume)
+                .desc("Объем")
+                .hasArg()
+                .argName("VOLUME")
+                .build());
     }
 
     public static String getLogin() {
@@ -63,6 +86,18 @@ public class ParseCMD {
 
     public static String getPath() {
         return getOption(Path);
+    }
+
+    public static String getDateIn() {
+        return getOption(DateIn);
+    }
+
+    public static String getDateOut() {
+        return getOption(DateOut);
+    }
+
+    public static String getVolume() {
+        return getOption(Volume);
     }
 
     public void Parse(String[] args) throws Exception {
