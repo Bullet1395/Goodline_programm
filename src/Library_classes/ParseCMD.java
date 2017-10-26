@@ -104,7 +104,7 @@ public class ParseCMD {
         try {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
-            if (line.hasOption("help")) {
+            if (line.hasOption("help") || line.getArgList().size() == 0) {
                 throw new Exception(PrintHelp());
             }
         } catch (Exception e) {

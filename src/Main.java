@@ -10,6 +10,7 @@ public class Main {
         ParseCMD cmd_args = new ParseCMD();
         cmd_args.Parse(args);
 
+
         Users User_Read = new Users("User_Read", "123_r");
         Users User_Write = new Users("User_Write", "123_w");
         Users User_Execute = new Users("User_Execute", "123_e");
@@ -34,15 +35,12 @@ public class Main {
 
         Users Authentification_User = Authentification.Log_IN(users);
 
-
-
         if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path")) {
             Authorization.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
             if (ParseCMD.checkOption("ds") && ParseCMD.checkOption("de") && ParseCMD.checkOption("v")) {
                 Accaunting.CheckParam(ParseCMD.getDateIn(), ParseCMD.getDateOut(), ParseCMD.getVolume());
                 System.exit(0);
-            }
-            else System.exit(0);
+            } else System.exit(0);
         }
 
     }
