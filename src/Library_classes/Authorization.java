@@ -11,18 +11,25 @@ public class Authorization {
         int iter2 = CountInUser(resources, user.GetLogin());
         for (Resources res : resources) {
             if (user.GetLogin().equals(res.GetUser())) {
-                for (Roles r : Roles.values()) {
-                    if (r.name().equals(Role)) {
-                        if (CheckPathRole(Path, res) == true) {
-                            if (Roles.valueOf(Role) == res.GetRole()) {
-                                System.exit(0);
-                            } else if (iter == iter2) System.exit(4);
+                iter++;
+                if (CheckInRole(Role)) {
+                    if (CheckPathRole(Path, res)) {
+                        if (Roles.valueOf(Role) == res.GetRole()) {
+                            System.exit(0);
                         } else if (iter == iter2) System.exit(4);
-                    } if (Roles.valueOf(r.name()).ordinal() == Roles.values().length-1 && iter == iter2) System.exit(3);
+                    } else if (iter == iter2) System.exit(4);
                 }
             } else if (resources.indexOf(res) == resources.size()) System.exit(1);
-            iter++;
         }
+    }
+
+    private static boolean CheckInRole(String Role) {
+        for (Roles r : Roles.values()) {
+            if (r.name().equals(Role)) {
+                return true;
+                }else if (Roles.valueOf(r.name()).ordinal() == Roles.values().length-1) System.exit(3);
+            }
+        return false;
     }
 
     private static int CountInUser(List<Resources> resources, String User) {
@@ -35,10 +42,11 @@ public class Authorization {
     }
 
     private static boolean CheckPathRole(String Path, Resources resource){
-        String p1 = resource.GetPath();
-        String p2 = Path.substring(0, resource.GetPath().length());
-        if (p1.equals((p2))) {
-            return true;
-        } else return false;
+        if (Path.length() >= resource.GetPath().length()) {
+            String p1 = resource.GetPath();
+            String p2 = Path.substring(0, resource.GetPath().length());
+            return p1.equals((p2));
+        }
+        return false;
     }
 }

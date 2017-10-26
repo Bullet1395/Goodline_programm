@@ -34,7 +34,7 @@ public class Main {
 
         Users Authentification_User = Authentification.Log_IN(users);
 
-        if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
+        if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path"))
             Authorization.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
     }
 }

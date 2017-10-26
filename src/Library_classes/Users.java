@@ -4,7 +4,7 @@ import Security.EncryptedPass;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Users
 {
@@ -17,10 +17,10 @@ public class Users
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
         random.nextBytes(bytes);
-        return bytes.toString();
+        return Arrays.toString(bytes);
     }
 
-    public  Users()
+    Users()
     {
         this.Login = "Login";
         this.Salt = "Salt";
@@ -34,32 +34,32 @@ public class Users
         this.Password = EncryptedPass.hashPassword(Password, Salt);
     }
 
-    public String GetLogin()
+    String GetLogin()
     {
         return this.Login;
     }
 
-    public String GetPassword()
+    String GetPassword()
     {
         return this.Password;
     }
 
-    public String GetSalt()
+    String GetSalt()
     {
         return this.Salt;
     }
 
-    public void SetSalt(String Salt)
+    void SetSalt(String Salt)
     {
         this.Salt = Salt;
     }
 
-    public void SetLogin(String Login)
+    void SetLogin(String Login)
     {
         this.Login = Login;
     }
 
-    public void SetPassword(String Password) throws NoSuchAlgorithmException
+    void SetPassword(String Password) throws NoSuchAlgorithmException
     {
         this.Password = EncryptedPass.hashPassword(Password, Salt);
     }

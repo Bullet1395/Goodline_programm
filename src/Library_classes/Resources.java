@@ -2,8 +2,6 @@ package Library_classes;
 
 import Enums.Roles;
 
-import java.util.List;
-
 public class Resources {
     private String User;
     private Enum<Roles> Role;
@@ -16,7 +14,7 @@ public class Resources {
         this.Path = Path;
     }
 
-    public String GetUser(){
+    String GetUser(){
         return this.User;
     }
 
@@ -24,7 +22,7 @@ public class Resources {
         this.User = User;
     }
 
-    public String GetPath(){
+    String GetPath(){
         return this.Path;
     }
 
@@ -32,7 +30,7 @@ public class Resources {
         this.Path = Path;
     }
 
-    public Enum<Roles> GetRole(){
+    Enum<Roles> GetRole(){
         return this.Role;
     }
 

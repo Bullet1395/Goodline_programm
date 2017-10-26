@@ -15,7 +15,7 @@ public class Authentification {
                 aut_user.SetSalt(u.GetSalt());
                 aut_user.SetPassword(ParseCMD.getPassword());
                 if (aut_user.GetPassword().equals(u.GetPassword())) {
-                    if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
+                    if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path"))
                         return aut_user;
                     System.exit(0);
                 } else
