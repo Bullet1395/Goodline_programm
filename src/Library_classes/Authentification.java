@@ -1,77 +1,29 @@
 package Library_classes;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.Option;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
-public class Authentification {}
-  /*  private final static String Login = "Login";
-    private final static String Password = "Password";
+public class Authentification {
 
-    private Options options;
-    private CommandLine line;
-
-    public Authentification() {
-        options = new Options();
-        options.addOption(Option.builder("l")
-                .longOpt(Login)
-                .desc("Логин пользователя")
-                .hasArg()
-                .argName("LOGIN")
-                .build());
-        options.addOption(Option.builder("p")
-                .longOpt(Password)
-                .desc("Пароль")
-                .hasArg()
-                .argName("PASSWORD")
-                .build());
-        options.addOption(Option.builder("h")
-                .longOpt("help")
-                .desc("Вывод справки")
-                .build());
-    }
-
-    public String getLogin() {
-        return getOption(Login);
-    }
-
-    public String getPassword() {
-        return getOption(Password);
-    }
-
-    public void Parse(String[] args) throws Exception {
-        try {
-            CommandLineParser parser = new DefaultParser();
-            line = parser.parse(options, args);
-            if (line.hasOption("help")) {
-                throw new Exception(PrintHelp());
+    public static Users Log_IN(ArrayList<Users> users) throws NoSuchAlgorithmException {
+        Users aut_user = new Users();
+        String aut_log = ParseCMD.getLogin();
+        for (Users u : users) {
+            String userLogin = u.GetLogin();
+            if (aut_log.equals(userLogin)) {
+                aut_user.SetLogin(aut_log);
+                aut_user.SetSalt(u.GetSalt());
+                aut_user.SetPassword(ParseCMD.getPassword());
+                if (aut_user.GetPassword().equals(u.GetPassword())) {
+                    if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
+                        return aut_user;
+                    System.exit(0);
+                } else
+                    System.exit(2);
             }
-        } catch (Exception e) {
+            if (users.indexOf(u) == (users.size() - 1))
+                System.exit(1);
         }
-    }
-
-    public String getOption(String optionName) {
-        String opt = "";
-        if (line.hasOption(optionName)) {
-            try {
-                opt = line.getOptionValue(optionName);
-            } catch (NumberFormatException e) {
-            }
-            return opt;
-        } else {
-            return opt;
-        }
-    }
-
-    private String PrintHelp() {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
-                options, "Разработано: Bullet1395");
-        return formatter.toString();
+        return aut_user;
     }
 }
-
-*/

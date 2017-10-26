@@ -32,9 +32,9 @@ public class Main {
         resources.add(res_4);
         resources.add(res_5);
 
-        Users Authentification_User = Users.Log_IN(users);
+        Users Authentification_User = Authentification.Log_IN(users);
 
         if (ParseCMD.checkOption("r") == true && ParseCMD.checkOption("path") == true)
-            Resources.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
+            Authorization.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
     }
 }

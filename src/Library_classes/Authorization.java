@@ -1,78 +1,44 @@
 package Library_classes;
 
 import Enums.Roles;
-import org.apache.commons.cli.*;
 
-/*public class Authorization {
-    private final static String User = "USER";
-    private final static String Role = "ROLE";
-    private final static String Path = "PATH";
+import java.util.List;
 
-    private Options options;
-    private CommandLine line;
+public class Authorization {
 
-    public Authorization() {
-        options = new Options();
-        options.addOption(Option.builder("u")
-                .longOpt(User)
-                .desc("Логин пользователя")
-                .hasArg()
-                .argName("USER")
-                .build());
-        options.addOption(Option.builder("r")
-                .longOpt(Role)
-                .desc("Роль")
-                .hasArg()
-                .argName("ROLE")
-                .build());
-        options.addOption(Option.builder()
-                .longOpt(Path)
-                .desc("Путь до ресурса")
-                .hasArg()
-                .argName("PATH")
-                .build());
-    }
-
-    public String getUser() {
-        return getOption(User);
-    }
-
-    public String getRole() {
-        return getOption(Role);
-    }
-
-    public String getPath() {
-        return getOption(Path);
-    }
-
-    public void Parse(String[] args) throws Exception {
-        try {
-            CommandLineParser parser = new DefaultParser();
-            line = parser.parse(options, args);
-            if (line.hasOption("help")) {
-                throw new Exception(PrintHelp());
-            }
-        } catch (Exception e) {
+    public static void CheckParam(Users user, List<Resources> resources, String Role, String Path) {
+        int iter = 0;
+        int iter2 = CountInUser(resources, user.GetLogin());
+        for (Resources res : resources) {
+            if (user.GetLogin().equals(res.GetUser())) {
+                for (Roles r : Roles.values()) {
+                    if (r.name().equals(Role)) {
+                        if (CheckPathRole(Path, res) == true) {
+                            if (Roles.valueOf(Role) == res.GetRole()) {
+                                System.exit(0);
+                            } else if (iter == iter2) System.exit(4);
+                        } else if (iter == iter2) System.exit(4);
+                    } if (Roles.valueOf(r.name()).ordinal() == Roles.values().length-1 && iter == iter2) System.exit(3);
+                }
+            } else if (resources.indexOf(res) == resources.size()) System.exit(1);
+            iter++;
         }
     }
 
-    private String PrintHelp() {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
-                options, "Разработано: Bullet1395");
-        return formatter.toString();
+    private static int CountInUser(List<Resources> resources, String User) {
+        int count_us = 0;
+        for (Resources res: resources) {
+            if (res.GetUser().equals(User))
+                count_us ++;
+        }
+        return count_us;
     }
 
-    public String getOption(String optionName) {
-        String opt = "";
-        if (line.hasOption(optionName)) {
-            try {
-                opt = line.getOptionValue(optionName);
-            } catch (NumberFormatException e) {
-            }
-            return opt;
-        } else {
-            return opt;
-        }
+    private static boolean CheckPathRole(String Path, Resources resource){
+        String p1 = resource.GetPath();
+        String p2 = Path.substring(0, resource.GetPath().length());
+        if (p1.equals((p2))) {
+            return true;
+        } else return false;
     }
-}*/
+}
