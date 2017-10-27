@@ -7,17 +7,15 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 
-import java.util.Date;
-
 public class ParseCMD {
 
-    private final static String Login = "login";
-    private final static String Password = "password";
-    private final static String Role = "role";
-    private final static String Path = "path";
-    private final static String DateIn= "ds";
-    private final static String DateOut = "de";
-    private final static String Volume = "volume";
+    private final static String LOGIN = "login";
+    private final static String PASSWORD = "password";
+    private final static String ROLE = "role";
+    private final static String PATH = "path";
+    private final static String DATE_IN = "ds";
+    private final static String DATE_OUT = "de";
+    private final static String VOLUME = "volume";
 
     private Options options;
     private static CommandLine line;
@@ -25,13 +23,13 @@ public class ParseCMD {
     public ParseCMD() {
         options = new Options();
         options.addOption(Option.builder("l")
-                .longOpt(Login)
+                .longOpt(LOGIN)
                 .desc("Логин пользователя")
                 .hasArg()
                 .argName("LOGIN")
                 .build());
         options.addOption(Option.builder("p")
-                .longOpt(Password)
+                .longOpt(PASSWORD)
                 .desc("Пароль")
                 .hasArg()
                 .argName("PASSWORD")
@@ -41,31 +39,31 @@ public class ParseCMD {
                 .desc("Вывод справки")
                 .build());
         options.addOption(Option.builder("r")
-                .longOpt(Role)
+                .longOpt(ROLE)
                 .desc("Роль")
                 .hasArg()
                 .argName("ROLE")
                 .build());
         options.addOption(Option.builder()
-                .longOpt(Path)
+                .longOpt(PATH)
                 .desc("Путь до ресурса")
                 .hasArg()
                 .argName("PATH")
                 .build());
         options.addOption(Option.builder("ds")
-                .longOpt(DateIn)
+                .longOpt(DATE_IN)
                 .desc("Дата входа")
                 .hasArg()
                 .argName("DATE IN")
                 .build());
         options.addOption(Option.builder("de")
-                .longOpt(DateOut)
+                .longOpt(DATE_OUT)
                 .desc("Дата выхода")
                 .hasArg()
                 .argName("DATE OUT")
                 .build());
         options.addOption(Option.builder("v")
-                .longOpt(Volume)
+                .longOpt(VOLUME)
                 .desc("Объем")
                 .hasArg()
                 .argName("VOLUME")
@@ -73,39 +71,39 @@ public class ParseCMD {
     }
 
     static String getLogin() {
-        return getOption(Login);
+        return getOption(LOGIN);
     }
 
     static String getPassword() {
-        return getOption(Password);
+        return getOption(PASSWORD);
     }
 
     public static String getRole() {
-        return getOption(Role);
+        return getOption(ROLE);
     }
 
     public static String getPath() {
-        return getOption(Path);
+        return getOption(PATH);
     }
 
     public static String getDateIn() {
-        return getOption(DateIn);
+        return getOption(DATE_IN);
     }
 
     public static String getDateOut() {
-        return getOption(DateOut);
+        return getOption(DATE_OUT);
     }
 
     public static String getVolume() {
-        return getOption(Volume);
+        return getOption(VOLUME);
     }
 
-    public void Parse(String[] args) throws Exception {
+    public void parse(String[] args) throws Exception {
         try {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
             if (line.hasOption("help") || args.length == 0) {
-                throw new Exception(PrintHelp());
+                throw new Exception(printHelp());
             }
         } catch (Exception e) {
         }
@@ -124,11 +122,11 @@ public class ParseCMD {
         }
     }
 
-    public static boolean checkOption(String optionName){
+    public static boolean ischeckOption(String optionName){
         return line.hasOption(optionName);
     }
 
-    private String PrintHelp() {
+    private String printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
                 options, "Разработано: Bullet1395");

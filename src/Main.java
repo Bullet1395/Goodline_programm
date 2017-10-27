@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         ParseCMD cmd_args = new ParseCMD();
-        cmd_args.Parse(args);
+        cmd_args.parse(args);
 
 
         Users User_Read = new Users("User_Read", "123_r");
@@ -33,12 +33,12 @@ public class Main {
         resources.add(res_4);
         resources.add(res_5);
 
-        Users Authentification_User = Authentification.Log_IN(users);
+        Users Authentification_User = Authentification.sLog_IN(users);
 
-        if (ParseCMD.checkOption("r") && ParseCMD.checkOption("path")) {
-            Authorization.CheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
-            if (ParseCMD.checkOption("ds") && ParseCMD.checkOption("de") && ParseCMD.checkOption("v")) {
-                Accaunting.CheckParam(ParseCMD.getDateIn(), ParseCMD.getDateOut(), ParseCMD.getVolume());
+        if (ParseCMD.ischeckOption("r") && ParseCMD.ischeckOption("path")) {
+            Authorization.sCheckParam(Authentification_User, resources, ParseCMD.getRole(), ParseCMD.getPath());
+            if (ParseCMD.ischeckOption("ds") && ParseCMD.ischeckOption("de") && ParseCMD.ischeckOption("v")) {
+                Accaunting.checkParam(ParseCMD.getDateIn(), ParseCMD.getDateOut(), ParseCMD.getVolume());
                 System.exit(0);
             } else System.exit(0);
         }
