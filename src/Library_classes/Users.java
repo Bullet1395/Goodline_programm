@@ -8,11 +8,11 @@ import java.util.Arrays;
 
 public class Users
 {
-    private String mLogin;
-    private String mPassword;
-    private String mSalt;
+    private String login;
+    private String password;
+    private String salt;
 
-    private static String sSetSalt()
+    private static String setSalt()
     {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
@@ -22,45 +22,45 @@ public class Users
 
     Users()
     {
-        this.mLogin = "Login";
-        this.mSalt = "Salt";
-        this.mPassword = "Password";
+        this.login = "login";
+        this.salt = "salt";
+        this.password = "password";
     }
 
-    public Users(String Login, String Password) throws NoSuchAlgorithmException
+    public Users(String login, String password) throws NoSuchAlgorithmException
     {
-        this.mLogin = Login;
-        this.mSalt = sSetSalt();
-        this.mPassword = EncryptedPass.hashPassword(Password, mSalt);
+        this.login = login;
+        this.salt = setSalt();
+        this.password = EncryptedPass.hashPassword(password, salt);
     }
 
     String getLogin()
     {
-        return this.mLogin;
+        return this.login;
     }
 
     String getPassword()
     {
-        return this.mPassword;
+        return this.password;
     }
 
     String getSalt()
     {
-        return this.mSalt;
+        return this.salt;
     }
 
-    void setSalt(String Salt)
+    void setSalt(String salt)
     {
-        this.mSalt = Salt;
+        this.salt = salt;
     }
 
-    void setLogin(String Login)
+    void setLogin(String login)
     {
-        this.mLogin = Login;
+        this.login = login;
     }
 
-    void setPassword(String Password) throws NoSuchAlgorithmException
+    void setPassword(String password) throws NoSuchAlgorithmException
     {
-        this.mPassword = EncryptedPass.hashPassword(Password, mSalt);
+        this.password = EncryptedPass.hashPassword(password, salt);
     }
 }

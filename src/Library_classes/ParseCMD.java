@@ -122,7 +122,7 @@ public class ParseCMD {
         }
     }
 
-    public static boolean ischeckOption(String optionName){
+    public static boolean isCheckOption(String optionName){
         return line.hasOption(optionName);
     }
 
