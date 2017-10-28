@@ -8,7 +8,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 
 public class ParseCMD {
-
     private final static String LOGIN = "login";
     private final static String PASSWORD = "password";
     private final static String ROLE = "role";
@@ -109,7 +108,7 @@ public class ParseCMD {
         }
     }
 
-    public static String getOption(String optionName) {
+    private static String getOption(String optionName) {
         String opt = "";
         if (line.hasOption(optionName)) {
             try {

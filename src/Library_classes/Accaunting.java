@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Accaunting {
-
     public static void checkParam(String dateIn, String dateOut, String volume){
         if (isCheckData(dateIn) && isCheckData(dateOut)){
             isCheckVolume(volume);

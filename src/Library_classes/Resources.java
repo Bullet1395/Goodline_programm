@@ -3,38 +3,26 @@ package Library_classes;
 import Enums.Roles;
 
 public class Resources {
-    private String User;
-    private Enum<Roles> Role;
-    private String Path;
+    private String user;
+    private Enum<Roles> role;
+    private String path;
 
     public Resources(String user, Enum<Roles> role, String path)
     {
-        this.User = user;
-        this.Role = role;
-        this.Path = path;
+        this.user = user;
+        this.role = role;
+        this.path = path;
     }
 
     String getUser(){
-        return this.User;
-    }
-
-    public void SetUser(String user){
-        this.User = user;
+        return this.user;
     }
 
     String getPath(){
-        return this.Path;
-    }
-
-    public void SetPath(String path){
-        this.Path = path;
+        return this.path;
     }
 
     Enum<Roles> getRole(){
-        return this.Role;
-    }
-
-    public void SetRole(Enum<Roles> role){
-        this.Role = role;
+        return this.role;
     }
 }

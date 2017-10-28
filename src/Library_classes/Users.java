@@ -6,61 +6,51 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class Users
-{
+public class Users {
     private String login;
     private String password;
     private String salt;
 
-    private static String setSalt()
-    {
+    private static String setSalt() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
         random.nextBytes(bytes);
         return Arrays.toString(bytes);
     }
 
-    Users()
-    {
+    Users() {
         this.login = "login";
         this.salt = "salt";
         this.password = "password";
     }
 
-    public Users(String login, String password) throws NoSuchAlgorithmException
-    {
+    public Users(String login, String password) throws NoSuchAlgorithmException {
         this.login = login;
         this.salt = setSalt();
         this.password = EncryptedPass.hashPassword(password, salt);
     }
 
-    String getLogin()
-    {
+    String getLogin() {
         return this.login;
     }
 
-    String getPassword()
-    {
+    String getPassword() {
         return this.password;
     }
 
-    String getSalt()
-    {
+    String getSalt() {
         return this.salt;
     }
 
-    void setSalt(String salt)
-    {
+    void setSalt(String salt) {
         this.salt = salt;
     }
 
-    void setLogin(String login)
-    {
+    void setLogin(String login) {
         this.login = login;
     }
 
-    void setPassword(String password) throws NoSuchAlgorithmException
-    {
+    void setPassword(String password) throws NoSuchAlgorithmException {
         this.password = EncryptedPass.hashPassword(password, salt);
     }
 }
