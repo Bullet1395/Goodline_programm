@@ -1,15 +1,9 @@
 package Library_classes;
 
+import Enums.Constants;
 import org.apache.commons.cli.CommandLine;
 
 public class ParseArgs {
-    private final static String LOGIN = "login";
-    private final static String PASSWORD = "password";
-    private final static String ROLE = "role";
-    private final static String PATH = "path";
-    private final static String DATE_IN = "ds";
-    private final static String DATE_OUT = "de";
-    private final static String VOLUME = "volume";
 
     private static CommandLine line = ParseCMD.getLine();
 
@@ -28,30 +22,30 @@ public class ParseArgs {
     }
 
     static String getLogin() {
-        return getOption(LOGIN);
+        return getOption(Constants.LOGIN.name().toLowerCase());
     }
 
     static String getPassword() {
-        return getOption(PASSWORD);
+        return getOption(Constants.PASSWORD.name().toLowerCase());
     }
 
     public static String getRole() {
-        return getOption(ROLE);
+        return getOption(Constants.ROLE.name().toLowerCase());
     }
 
     public static String getPath() {
-        return getOption(PATH);
+        return getOption(Constants.PATH.name().toLowerCase());
     }
 
     public static String getDateIn() {
-        return getOption(DATE_IN);
+        return getOption(Constants.DATE_IN.name().toLowerCase());
     }
 
     public static String getDateOut() {
-        return getOption(DATE_OUT);
+        return getOption(Constants.DATE_OUT.name().toLowerCase());
     }
 
     public static String getVolume() {
-        return getOption(VOLUME);
+        return getOption(Constants.VOLUME.name().toLowerCase());
     }
 }
