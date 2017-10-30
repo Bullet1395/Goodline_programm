@@ -21,13 +21,12 @@ public class Accaunting {
         return false;
     }
 
-    private static boolean isCheckVolume(String volume){
+    private static void isCheckVolume(String volume){
         String pat = "[0-9]+";
         Pattern p = Pattern.compile(pat);
         Matcher m = p.matcher(volume);
-        if (m.matches()) {
-            return true;
-        } else System.exit(5);
-        return false;
+        if (!m.matches()) {
+            System.exit(5);
+        }
     }
 }

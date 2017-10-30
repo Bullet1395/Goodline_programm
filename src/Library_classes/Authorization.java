@@ -22,6 +22,7 @@ public class Authorization {
         if (isCheckInRole(role)) {
             if (isCheckPathRole(path, res)) {
                 isCheckRoleToResource(role, res, iter, iter2);
+                System.exit(0);
             } else if (iter == iter2) {
                 System.exit(4);
             }
@@ -40,10 +41,10 @@ public class Authorization {
     }
 
     private static void isCheckRoleToResource(String role, Resources res, int iter, int iter2){
-        if (Roles.valueOf(role) == res.getRole()) {
-            return;
-        } else if (iter == iter2) {
-            System.exit(4);
+        if (Roles.valueOf(role) != res.getRole()) {
+            if (iter == iter2) {
+                System.exit(4);
+            }
         }
     }
 

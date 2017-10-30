@@ -14,6 +14,7 @@ public class Authentification {
                 autUser.setSalt(userInBase.getSalt());
                 autUser.setPassword(ParseArgs.getPassword());
                 checkUser(autUser, userInBase);
+                return autUser;
             }
             if (users.indexOf(userInBase) == (users.size() - 1)) {
                 System.exit(1);
@@ -22,16 +23,14 @@ public class Authentification {
         return autUser;
     }
 
-    private static Users checkUser(Users autUser, Users userInBase){
+    private static void checkUser(Users autUser, Users userInBase){
         if (autUser.getPassword().equals(userInBase.getPassword())) {
-            if (ParseCMD.isCheckOption("r") && ParseCMD.isCheckOption("path")) {
-                return autUser;
+            if (!ParseCMD.isCheckOption("r") || !ParseCMD.isCheckOption("path")) {
+                System.exit(0);
             }
-            System.exit(0);
         } else {
             System.exit(2);
         }
-        return autUser;
     }
 
 }
