@@ -8,24 +8,30 @@ public class Authentification {
         String autLog = ParseArgs.getLogin();
         Users autUser = new Users(autLog, "pass");
 
-        for (Users u : users) {
-            String userLogin = u.getLogin();
+        for (Users userInBase : users) {
+            String userLogin = userInBase.getLogin();
             if (autLog.equals(userLogin)) {
-                autUser.setSalt(u.getSalt());
+                autUser.setSalt(userInBase.getSalt());
                 autUser.setPassword(ParseArgs.getPassword());
-                if (autUser.getPassword().equals(u.getPassword())) {
-                    if (ParseCMD.isCheckOption("r") && ParseCMD.isCheckOption("path")) {
-                        return autUser;
-                    }
-                    System.exit(0);
-                } else {
-                    System.exit(2);
-                }
+                checkUser(autUser, userInBase);
             }
-            if (users.indexOf(u) == (users.size() - 1)) {
+            if (users.indexOf(userInBase) == (users.size() - 1)) {
                 System.exit(1);
             }
         }
         return autUser;
     }
+
+    private static Users checkUser(Users autUser, Users userInBase){
+        if (autUser.getPassword().equals(userInBase.getPassword())) {
+            if (ParseCMD.isCheckOption("r") && ParseCMD.isCheckOption("path")) {
+                return autUser;
+            }
+            System.exit(0);
+        } else {
+            System.exit(2);
+        }
+        return autUser;
+    }
+
 }
