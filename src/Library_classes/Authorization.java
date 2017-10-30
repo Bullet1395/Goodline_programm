@@ -11,19 +11,19 @@ public class Authorization {
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
                 iter++;
-                if (isCheckInRole(role)) {
-                    if (isCheckPathRole(path, res)) {
-                        if (Roles.valueOf(role) == res.getRole()) {
-                            return;
-                        } else if (iter == iter2) {
-                            System.exit(4);
-                        }
-                    } else if (iter == iter2) {
-                        System.exit(4);
-                    }
-                }
+                isCheckAccess(role, path, res, iter, iter2);
             } else if (resources.indexOf(res) == resources.size()) {
                 System.exit(1);
+            }
+        }
+    }
+
+    private static void isCheckAccess(String role, String path, Resources res, int iter, int iter2){
+        if (isCheckInRole(role)) {
+            if (isCheckPathRole(path, res)) {
+                isCheckRoleToResource(role, res, iter, iter2);
+            } else if (iter == iter2) {
+                System.exit(4);
             }
         }
     }
@@ -37,6 +37,14 @@ public class Authorization {
             }
         }
         return false;
+    }
+
+    private static void isCheckRoleToResource(String role, Resources res, int iter, int iter2){
+        if (Roles.valueOf(role) == res.getRole()) {
+            return;
+        } else if (iter == iter2) {
+            System.exit(4);
+        }
     }
 
     private static int countInUser(List<Resources> resources, String user) {
