@@ -1,6 +1,6 @@
-package Library_classes;
+package Domain;
 
-import Security.EncryptedPass;
+import Service.Security.EncryptedPass;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -24,23 +24,23 @@ public class Users {
         this.password = EncryptedPass.hashPassword(password, salt);
     }
 
-    String getLogin() {
+    public String getLogin() {
         return this.login;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    String getSalt() {
+    public String getSalt() {
         return this.salt;
     }
 
-    void setSalt(String salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 
-    void setPassword(String password) throws NoSuchAlgorithmException {
+    public void setPassword(String password) throws NoSuchAlgorithmException {
         this.password = EncryptedPass.hashPassword(password, salt);
     }
 }

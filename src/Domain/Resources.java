@@ -1,6 +1,6 @@
-package Library_classes;
+package Domain;
 
-import Enums.Roles;
+import Domain.Enums.Roles;
 
 public class Resources {
     private String user;
@@ -14,15 +14,15 @@ public class Resources {
         this.path = path;
     }
 
-    String getUser(){
+    public String getUser(){
         return this.user;
     }
 
-    String getPath(){
+    public String getPath(){
         return this.path;
     }
 
-    Enum<Roles> getRole(){
+    public Enum<Roles> getRole(){
         return this.role;
     }
 }

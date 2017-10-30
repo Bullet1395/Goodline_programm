@@ -1,4 +1,4 @@
-package Enums;
+package Domain.Enums;
 
 public enum Roles {
     READ,

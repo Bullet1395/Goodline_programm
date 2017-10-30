@@ -1,4 +1,4 @@
-package Library_classes;
+package Domain;
 
 import java.util.Date;
 

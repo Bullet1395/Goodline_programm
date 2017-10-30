@@ -1,6 +1,8 @@
-package Library_classes;
+package Service;
 
-import Enums.Roles;
+import Domain.Resources;
+import Domain.Users;
+import Domain.Enums.Roles;
 
 import java.util.List;
 
