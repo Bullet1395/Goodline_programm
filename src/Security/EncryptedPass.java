@@ -17,9 +17,10 @@ public class EncryptedPass {
         sha.update((Password + Salt).getBytes());
         byte[] bytes = sha.digest();
 
-        for (int i = 0; i < bytes.length; i++) {
-            hash.append(Integer.toString((bytes[i] & 0xFF), 16));
+        for (byte b: bytes) {
+            hash.append(Integer.toString((b & 0xFF), 16));
         }
+
         return hash.toString();
     }
 }
