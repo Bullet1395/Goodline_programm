@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Main {
-
     public static void main(String[] args) throws Exception {
         ParseCMD cmd_args = new ParseCMD();
         cmd_args.parse(args);
