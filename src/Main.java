@@ -1,8 +1,9 @@
 import Enums.Roles;
 import Library_classes.*;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -25,12 +26,14 @@ public class Main {
         users.add(userWrite);
         users.add(userExecute);
 
-        List<Resources> resources = new ArrayList<>();
+        ArrayList<Resources> resources = new ArrayList<>();
         resources.add(res1);
         resources.add(res2);
         resources.add(res3);
         resources.add(res4);
         resources.add(res5);
+
+        ArrayList<Accaunts> accaunts = new ArrayList<>();
 
         Users authentUser = Authentification.sLog_IN(users);
 
@@ -38,6 +41,9 @@ public class Main {
             Authorization.checkParam(authentUser, resources, ParseArgs.getRole(), ParseArgs.getPath());
             if (ParseCMD.isCheckOption("ds") && ParseCMD.isCheckOption("de") && ParseCMD.isCheckOption("v")) {
                 Accaunting.checkParam(ParseArgs.getDateIn(), ParseArgs.getDateOut(), ParseArgs.getVolume());
+                accaunts.add(new Accaunts(new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateIn()),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateOut()),
+                        Integer.parseInt(ParseArgs.getVolume())));
                 System.exit(0);
             } else System.exit(0);
         }
