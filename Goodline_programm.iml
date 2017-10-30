@@ -6,7 +6,21 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" exported="" name="commons-cli-1.4" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="commons-cli-1.4">
+        <CLASSES>
+          <root url="file://C:/Program Files (x86)/Java/commons-cli-1.4" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/lib/apidocs" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="file://C:/Program Files (x86)/Java/commons-cli-1.4" />
+        </SOURCES>
+        <jarDirectory url="file://C:/Program Files (x86)/Java/commons-cli-1.4" recursive="false" />
+        <jarDirectory url="file://C:/Program Files (x86)/Java/commons-cli-1.4" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
