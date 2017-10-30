@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Authentification {
     public static Users sLog_IN(ArrayList<Users> users) throws NoSuchAlgorithmException {
-        Users autUser = new Users();
         String autLog = ParseCMD.getLogin();
+        Users autUser = new Users(autLog, "pass");
+
         for (Users u : users) {
             String userLogin = u.getLogin();
             if (autLog.equals(userLogin)) {
-                autUser.setLogin(autLog);
                 autUser.setSalt(u.getSalt());
                 autUser.setPassword(ParseCMD.getPassword());
                 if (autUser.getPassword().equals(u.getPassword())) {

@@ -127,8 +127,8 @@ public class ParseCMD {
 
     private String printHelp() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Goodline application", "Прочитайте инструкцию к программе",
-                options, "Разработано: Bullet1395");
+        formatter.printHelp("Goodline application", "Справка",
+                options, "...");
         return formatter.toString();
     }
 }

@@ -18,12 +18,6 @@ public class Users {
         return Arrays.toString(bytes);
     }
 
-    Users() {
-        this.login = "login";
-        this.salt = "salt";
-        this.password = "password";
-    }
-
     public Users(String login, String password) throws NoSuchAlgorithmException {
         this.login = login;
         this.salt = setSalt();
@@ -44,10 +38,6 @@ public class Users {
 
     void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    void setLogin(String login) {
-        this.login = login;
     }
 
     void setPassword(String password) throws NoSuchAlgorithmException {
