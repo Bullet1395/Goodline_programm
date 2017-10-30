@@ -11,22 +11,26 @@ public class Authorization {
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
                 iter++;
-                isCheckAccess(role, path, res, iter, iter2);
+                if (isCheckAccess(role, path, res, iter, iter2)){
+                    break;
+                }
             } else if (resources.indexOf(res) == resources.size()) {
                 System.exit(1);
             }
         }
     }
 
-    private static void isCheckAccess(String role, String path, Resources res, int iter, int iter2){
+    private static boolean isCheckAccess(String role, String path, Resources res, int iter, int iter2){
         if (isCheckInRole(role)) {
             if (isCheckPathRole(path, res)) {
-                isCheckRoleToResource(role, res, iter, iter2);
-                System.exit(0);
+                if (isCheckRoleToResource(role, res, iter, iter2)){
+                    return true;
+                }
             } else if (iter == iter2) {
                 System.exit(4);
             }
         }
+        return false;
     }
 
     private static boolean isCheckInRole(String role) {
@@ -40,12 +44,13 @@ public class Authorization {
         return false;
     }
 
-    private static void isCheckRoleToResource(String role, Resources res, int iter, int iter2){
-        if (Roles.valueOf(role) != res.getRole()) {
-            if (iter == iter2) {
-                System.exit(4);
-            }
+    private static boolean isCheckRoleToResource(String role, Resources res, int iter, int iter2){
+        if (Roles.valueOf(role) == res.getRole()) {
+            return true;
+        } else if (iter == iter2) {
+            System.exit(4);
         }
+        return false;
     }
 
     private static int countInUser(List<Resources> resources, String user) {

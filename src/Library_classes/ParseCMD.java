@@ -69,10 +69,11 @@ public class ParseCMD {
                 throw new Exception(printHelp());
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public static CommandLine getLine(){
+    static CommandLine getLine(){
         return line;
     }
 

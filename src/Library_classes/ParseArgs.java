@@ -19,6 +19,7 @@ public class ParseArgs {
             try {
                 opt = line.getOptionValue(optionName);
             } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
             }
             return opt;
         } else {
