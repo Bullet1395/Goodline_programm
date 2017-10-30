@@ -1,7 +1,7 @@
 @echo off
 chcp 1251
 
-SET CLI=".\lib\commons-cli-1.4.jar"
+SET CLI=".\commons-cli-1.4.jar"
 
 cd "C:\Users\Bullet1395\IdeaProjects\Goodline_programm\out\production\Goodline_programm"
 
