@@ -35,9 +35,9 @@ public class Main {
         Users authentUser = Authentification.sLog_IN(users);
 
         if (ParseCMD.isCheckOption("r") && ParseCMD.isCheckOption("path")) {
-            Authorization.checkParam(authentUser, resources, ParseCMD.getRole(), ParseCMD.getPath());
+            Authorization.checkParam(authentUser, resources, ParseArgs.getRole(), ParseArgs.getPath());
             if (ParseCMD.isCheckOption("ds") && ParseCMD.isCheckOption("de") && ParseCMD.isCheckOption("v")) {
-                Accaunting.checkParam(ParseCMD.getDateIn(), ParseCMD.getDateOut(), ParseCMD.getVolume());
+                Accaunting.checkParam(ParseArgs.getDateIn(), ParseArgs.getDateOut(), ParseArgs.getVolume());
                 System.exit(0);
             } else System.exit(0);
         }

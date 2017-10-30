@@ -8,27 +8,19 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 
 public class ParseCMD {
-    private final static String LOGIN = "login";
-    private final static String PASSWORD = "password";
-    private final static String ROLE = "role";
-    private final static String PATH = "path";
-    private final static String DATE_IN = "ds";
-    private final static String DATE_OUT = "de";
-    private final static String VOLUME = "volume";
-
     private Options options;
     private static CommandLine line;
 
     public ParseCMD() {
         options = new Options();
         options.addOption(Option.builder("l")
-                .longOpt(LOGIN)
+                .longOpt("login")
                 .desc("Логин пользователя")
                 .hasArg()
                 .argName("LOGIN")
                 .build());
         options.addOption(Option.builder("p")
-                .longOpt(PASSWORD)
+                .longOpt("password")
                 .desc("Пароль")
                 .hasArg()
                 .argName("PASSWORD")
@@ -38,63 +30,35 @@ public class ParseCMD {
                 .desc("Вывод справки")
                 .build());
         options.addOption(Option.builder("r")
-                .longOpt(ROLE)
+                .longOpt("role")
                 .desc("Роль")
                 .hasArg()
                 .argName("ROLE")
                 .build());
         options.addOption(Option.builder()
-                .longOpt(PATH)
+                .longOpt("path")
                 .desc("Путь до ресурса")
                 .hasArg()
                 .argName("PATH")
                 .build());
         options.addOption(Option.builder("ds")
-                .longOpt(DATE_IN)
+                .longOpt("date_in")
                 .desc("Дата входа")
                 .hasArg()
                 .argName("DATE IN")
                 .build());
         options.addOption(Option.builder("de")
-                .longOpt(DATE_OUT)
+                .longOpt("date_out")
                 .desc("Дата выхода")
                 .hasArg()
                 .argName("DATE OUT")
                 .build());
         options.addOption(Option.builder("v")
-                .longOpt(VOLUME)
+                .longOpt("volume")
                 .desc("Объем")
                 .hasArg()
                 .argName("VOLUME")
                 .build());
-    }
-
-    static String getLogin() {
-        return getOption(LOGIN);
-    }
-
-    static String getPassword() {
-        return getOption(PASSWORD);
-    }
-
-    public static String getRole() {
-        return getOption(ROLE);
-    }
-
-    public static String getPath() {
-        return getOption(PATH);
-    }
-
-    public static String getDateIn() {
-        return getOption(DATE_IN);
-    }
-
-    public static String getDateOut() {
-        return getOption(DATE_OUT);
-    }
-
-    public static String getVolume() {
-        return getOption(VOLUME);
     }
 
     public void parse(String[] args) throws Exception {
@@ -108,17 +72,8 @@ public class ParseCMD {
         }
     }
 
-    private static String getOption(String optionName) {
-        String opt = "";
-        if (line.hasOption(optionName)) {
-            try {
-                opt = line.getOptionValue(optionName);
-            } catch (NumberFormatException e) {
-            }
-            return opt;
-        } else {
-            return opt;
-        }
+    public static CommandLine getLine(){
+        return line;
     }
 
     public static boolean isCheckOption(String optionName){
