@@ -4,10 +4,10 @@ import Enums.Roles;
 
 public class Resources {
     private String user;
-    private Enum<Roles> role;
+    private Roles role;
     private String path;
 
-    public Resources(String user, Enum<Roles> role, String path)
+    public Resources(String user, Roles role, String path)
     {
         this.user = user;
         this.role = role;
