@@ -1,8 +1,8 @@
-import Domain.Accaunts;
-import Domain.Resources;
-import Domain.Users;
-import Domain.Enums.Roles;
-import Service.*;
+import domain.Accaunts;
+import domain.Resources;
+import domain.Users;
+import domain.enums.Roles;
+import service.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,27 +13,17 @@ public class Main {
         ParseCMD cmd_args = new ParseCMD();
         cmd_args.parse(args);
 
-        Users userRead = new Users("User_Read", "123_r");
-        Users userWrite = new Users("User_Write", "123_w");
-        Users userExecute = new Users("User_Execute", "123_e");
-
-        Resources res1 = new Resources("User_Read", Roles.READ, "C.R.RR");
-        Resources res2 = new Resources("User_Read", Roles.READ, "C.W.WR.R");
-        Resources res3 = new Resources("User_Write", Roles.WRITE, "C.W.WR");
-        Resources res4 = new Resources("User_Write", Roles.WRITE, "C.R.RR.W");
-        Resources res5 = new Resources("User_Execute", Roles.EXECUTE, "C.E.ER");
-
         ArrayList<Users> users = new ArrayList<>();
-        users.add(userRead);
-        users.add(userWrite);
-        users.add(userExecute);
+        users.add(new Users("User_Read", "123_r"));
+        users.add(new Users("User_Write", "123_w"));
+        users.add(new Users("User_Execute", "123_e"));
 
         ArrayList<Resources> resources = new ArrayList<>();
-        resources.add(res1);
-        resources.add(res2);
-        resources.add(res3);
-        resources.add(res4);
-        resources.add(res5);
+        resources.add(new Resources("User_Read", Roles.READ, "C.R.RR"));
+        resources.add(new Resources("User_Read", Roles.READ, "C.W.WR.R"));
+        resources.add(new Resources("User_Write", Roles.WRITE, "C.W.WR"));
+        resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
+        resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
         ArrayList<Accaunts> accaunts = new ArrayList<>();
 

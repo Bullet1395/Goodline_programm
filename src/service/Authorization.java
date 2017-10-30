@@ -1,8 +1,8 @@
-package Service;
+package service;
 
-import Domain.Resources;
-import Domain.Users;
-import Domain.Enums.Roles;
+import domain.Resources;
+import domain.Users;
+import domain.enums.Roles;
 
 import java.util.List;
 

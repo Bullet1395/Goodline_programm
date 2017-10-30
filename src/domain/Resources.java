@@ -1,6 +1,6 @@
-package Domain;
+package domain;
 
-import Domain.Enums.Roles;
+import domain.enums.Roles;
 
 public class Resources {
     private String user;

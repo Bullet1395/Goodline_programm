@@ -1,6 +1,6 @@
-package Service;
+package service;
 
-import Domain.Enums.Constants;
+import domain.enums.Constants;
 import org.apache.commons.cli.CommandLine;
 
 public class ParseArgs {

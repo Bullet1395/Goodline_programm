@@ -1,6 +1,6 @@
-package Service;
+package service;
 
-import Domain.Users;
+import domain.Users;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;

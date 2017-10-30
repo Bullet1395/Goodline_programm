@@ -1,6 +1,6 @@
-package Domain;
+package domain;
 
-import Service.Security.EncryptedPass;
+import service.security.EncryptedPass;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
