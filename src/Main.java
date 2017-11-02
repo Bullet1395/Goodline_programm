@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        ParseCMD cmd_args = new ParseCMD();
+        ParseCommLine cmd_args = new ParseCommLine();
         cmd_args.parse(args);
 
         ArrayList<Users> users = new ArrayList<>();
@@ -24,19 +24,21 @@ public class Main {
         resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
+        Users authentUser = Authentification.Log_IN(users);
         ArrayList<Accaunts> accaunts = new ArrayList<>();
 
-        Users authentUser = Authentification.sLog_IN(users);
-
-        if (ParseCMD.isCheckOption("r") && ParseCMD.isCheckOption("path")) {
+        if (ParseCommLine.isCheckOption("r") && ParseCommLine.isCheckOption("path")) {
             Authorization.checkParam(authentUser, resources, ParseArgs.getRole(), ParseArgs.getPath());
-            if (ParseCMD.isCheckOption("ds") && ParseCMD.isCheckOption("de") && ParseCMD.isCheckOption("v")) {
+
+            if (ParseCommLine.isCheckOption("ds") && ParseCommLine.isCheckOption("de") && ParseCommLine.isCheckOption("v")) {
                 Accaunting.checkParam(ParseArgs.getDateIn(), ParseArgs.getDateOut(), ParseArgs.getVolume());
                 accaunts.add(new Accaunts(new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateIn()),
                         new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateOut()),
                         Integer.parseInt(ParseArgs.getVolume())));
                 System.exit(0);
-            } else System.exit(0);
+            } else {
+                System.exit(0);
+            }
         }
     }
 }

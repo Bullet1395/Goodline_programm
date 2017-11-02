@@ -7,11 +7,11 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.HelpFormatter;
 
-public class ParseCMD {
+public class ParseCommLine {
     private Options options;
     private static CommandLine line;
 
-    public ParseCMD() {
+    public ParseCommLine() {
         options = new Options();
         options.addOption(Option.builder("l")
                 .longOpt("login")
@@ -73,8 +73,19 @@ public class ParseCMD {
         }
     }
 
-    static CommandLine getLine(){
-        return line;
+    public static String getOption(String optionName) {
+        String opt = "";
+
+        if (line.hasOption(optionName)) {
+            try {
+                opt = line.getOptionValue(optionName);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+            return opt;
+        } else {
+            return opt;
+        }
     }
 
     public static boolean isCheckOption(String optionName){

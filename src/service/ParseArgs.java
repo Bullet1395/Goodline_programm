@@ -1,26 +1,9 @@
 package service;
 
 import domain.enums.Constants;
-import org.apache.commons.cli.CommandLine;
+import static service.ParseCommLine.getOption;
 
 public class ParseArgs {
-
-    private static CommandLine line = ParseCMD.getLine();
-
-    private static String getOption(String optionName) {
-        String opt = "";
-        if (line.hasOption(optionName)) {
-            try {
-                opt = line.getOptionValue(optionName);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
-            return opt;
-        } else {
-            return opt;
-        }
-    }
-
     static String getLogin() {
         return getOption(Constants.LOGIN.name().toLowerCase());
     }
