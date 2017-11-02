@@ -15,9 +15,9 @@ public class EncryptedPass {
          * radix 16 - система счисления 16-ричная
          */
         sha.update((Password + Salt).getBytes());
-        byte[] bytes = sha.digest();
+        sha.update(sha.digest());
 
-        for (byte b: bytes) {
+        for (byte b: sha.digest()) {
             hash.append(Integer.toString((b & 0xFF), 16));
         }
 
