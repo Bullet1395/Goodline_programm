@@ -3,12 +3,12 @@ package domain;
 import java.text.ParseException;
 import java.util.Date;
 
-public class Accaunts {
+public class Accounts {
     private Date dateIn;
     private Date dateOut;
     private int volume;
 
-    public Accaunts(Date dateIn, Date dateOut, int volume) throws ParseException {
+    public Accounts(Date dateIn, Date dateOut, int volume) throws ParseException {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.volume = volume;

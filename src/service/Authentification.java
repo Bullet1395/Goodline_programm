@@ -1,13 +1,14 @@
 package service;
 
 import domain.Users;
+import domain.enums.Constants;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class Authentification {
     public static Users logIn(ArrayList<Users> users) {
-        String autLog = ParseArgs.getLogin();
+        String autLog = ParseArgs.getArg(Constants.LOGIN.name());
         Users autUser = new Users(autLog, "pass");
 
         for (Users userInBase : users) {
@@ -16,7 +17,7 @@ public class Authentification {
             try {
                 if (autLog.equals(userLogin)) {
                     autUser.setSalt(userInBase.getSalt());
-                    autUser.setPassword(ParseArgs.getPassword());
+                    autUser.setPassword(ParseArgs.getArg(Constants.PASSWORD.name()));
                     checkUser(autUser, userInBase);
                     return autUser;
                 }
@@ -41,5 +42,4 @@ public class Authentification {
             System.exit(2);
         }
     }
-
 }

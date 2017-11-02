@@ -1,6 +1,7 @@
-import domain.Accaunts;
+import domain.Accounts;
 import domain.Resources;
 import domain.Users;
+import domain.enums.Constants;
 import domain.enums.Roles;
 import service.*;
 
@@ -26,17 +27,20 @@ public class Main {
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
         Users authentUser = Authentification.logIn(users);
-        ArrayList<Accaunts> accaunts = new ArrayList<>();
+        ArrayList<Accounts> accounts = new ArrayList<>();
 
         if (ParseCommLine.isCheckOption("r") && ParseCommLine.isCheckOption("path")) {
-            Authorization.checkParam(authentUser, resources, ParseArgs.getRole(), ParseArgs.getPath());
+            Authorization.checkParam(authentUser, resources, ParseArgs.getArg(Constants.ROLE.name()), ParseArgs.getArg(Constants.PATH.name()));
 
             if (ParseCommLine.isCheckOption("ds") && ParseCommLine.isCheckOption("de") && ParseCommLine.isCheckOption("v")) {
-                Accaunting.checkParam(ParseArgs.getDateIn(), ParseArgs.getDateOut(), ParseArgs.getVolume());
+                Accaunting.checkParam(ParseArgs.getArg(Constants.DATE_IN.name()),
+                        ParseArgs.getArg(Constants.DATE_OUT.name()),
+                        ParseArgs.getArg(Constants.VOLUME.name()));
                 try {
-                    accaunts.add(new Accaunts(new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateIn()),
-                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateOut()),
-                            Integer.parseInt(ParseArgs.getVolume())));
+                    accounts.add(new Accounts(
+                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getArg(Constants.DATE_IN.name())),
+                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getArg(Constants.DATE_OUT.name())),
+                            Integer.parseInt(ParseArgs.getArg(Constants.VOLUME.name()))));
                     System.exit(0);
                 } catch (ParseException e){
                     System.out.println("Неправильный формат ввода" + '\n' + e.getMessage());
