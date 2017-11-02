@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class EncryptedPass {
     public static String hashPassword(String Password, String Salt) throws NoSuchAlgorithmException {
-        StringBuffer hash = new StringBuffer();
+        StringBuilder hash = new StringBuilder();
         MessageDigest sha = MessageDigest.getInstance("SHA-512");
         /*
          * Метод возвращает hash пароля
