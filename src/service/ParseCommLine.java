@@ -61,19 +61,23 @@ public class ParseCommLine {
                 .build());
     }
 
-    public void parse(String[] args) throws Exception {
+    public void parse(String[] args) {
         try {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
-            if (line.hasOption("help") || args.length == 0) {
-                throw new Exception(printHelp());
-            }
+            checkOptionHelp(args);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static String getOption(String optionName) {
+    private void checkOptionHelp(String[] args) throws Exception {
+        if (line.hasOption("help") || args.length == 0) {
+            throw new Exception(printHelp());
+        }
+    }
+
+    static String getOption(String optionName) {
         String opt = "";
 
         if (line.hasOption(optionName)) {
