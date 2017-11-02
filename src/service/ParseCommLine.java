@@ -1,11 +1,6 @@
 package service;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.*;
 
 public class ParseCommLine {
     private Options options;
@@ -66,8 +61,10 @@ public class ParseCommLine {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
             checkOptionHelp(args);
-        } catch (Exception e) {
+        } catch (ParseException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e){
+            printHelp();
         }
     }
 

@@ -1,5 +1,6 @@
 package domain;
 
+import java.text.ParseException;
 import java.util.Date;
 
 public class Accaunts {
@@ -7,7 +8,7 @@ public class Accaunts {
     private Date dateOut;
     private int volume;
 
-    public Accaunts(Date dateIn, Date dateOut, int volume){
+    public Accaunts(Date dateIn, Date dateOut, int volume) throws ParseException {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.volume = volume;

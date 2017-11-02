@@ -1,26 +1,16 @@
 package domain;
 
 import service.security.EncryptedPass;
-
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class Users {
     private String login;
     private String password;
     private String salt;
 
-    private static String setSalt() {
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[16];
-        random.nextBytes(bytes);
-        return Arrays.toString(bytes);
-    }
-
-    public Users(String login, String password) throws NoSuchAlgorithmException {
+    public Users(String login, String password) {
         this.login = login;
-        this.salt = setSalt();
+        this.salt = EncryptedPass.setSalt();
         this.password = EncryptedPass.hashPassword(password, salt);
     }
 

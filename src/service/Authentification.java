@@ -6,18 +6,22 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class Authentification {
-    public static Users Log_IN(ArrayList<Users> users) throws NoSuchAlgorithmException {
+    public static Users logIn(ArrayList<Users> users) {
         String autLog = ParseArgs.getLogin();
         Users autUser = new Users(autLog, "pass");
 
         for (Users userInBase : users) {
             String userLogin = userInBase.getLogin();
 
-            if (autLog.equals(userLogin)) {
-                autUser.setSalt(userInBase.getSalt());
-                autUser.setPassword(ParseArgs.getPassword());
-                checkUser(autUser, userInBase);
-                return autUser;
+            try {
+                if (autLog.equals(userLogin)) {
+                    autUser.setSalt(userInBase.getSalt());
+                    autUser.setPassword(ParseArgs.getPassword());
+                    checkUser(autUser, userInBase);
+                    return autUser;
+                }
+            } catch (NoSuchAlgorithmException e) {
+                System.out.println(e.getMessage());
             }
 
             if (users.indexOf(userInBase) == (users.size() - 1)) {

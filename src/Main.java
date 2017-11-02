@@ -4,13 +4,14 @@ import domain.Users;
 import domain.enums.Roles;
 import service.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        ParseCommLine cmd_args = new ParseCommLine();
-        cmd_args.parse(args);
+    public static void main(String[] args) {
+        ParseCommLine cmdArgs = new ParseCommLine();
+        cmdArgs.parse(args);
 
         ArrayList<Users> users = new ArrayList<>();
         users.add(new Users("User_Read", "123_r"));
@@ -24,7 +25,7 @@ public class Main {
         resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
-        Users authentUser = Authentification.Log_IN(users);
+        Users authentUser = Authentification.logIn(users);
         ArrayList<Accaunts> accaunts = new ArrayList<>();
 
         if (ParseCommLine.isCheckOption("r") && ParseCommLine.isCheckOption("path")) {
@@ -32,10 +33,14 @@ public class Main {
 
             if (ParseCommLine.isCheckOption("ds") && ParseCommLine.isCheckOption("de") && ParseCommLine.isCheckOption("v")) {
                 Accaunting.checkParam(ParseArgs.getDateIn(), ParseArgs.getDateOut(), ParseArgs.getVolume());
-                accaunts.add(new Accaunts(new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateIn()),
-                        new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateOut()),
-                        Integer.parseInt(ParseArgs.getVolume())));
-                System.exit(0);
+                try {
+                    accaunts.add(new Accaunts(new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateIn()),
+                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getDateOut()),
+                            Integer.parseInt(ParseArgs.getVolume())));
+                    System.exit(0);
+                } catch (ParseException e){
+                    System.out.println("Неправильный формат ввода" + '\n' + e.getMessage());
+                }
             } else {
                 System.exit(0);
             }
