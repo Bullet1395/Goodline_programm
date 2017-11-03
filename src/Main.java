@@ -36,9 +36,9 @@ public class Main {
                     && ParseCommLine.isCheckOption("de")
                     && ParseCommLine.isCheckOption("v")) {
                 accounts.add(new Accounts(
-                        Accaunting.isCheckData(Constants.DATE_IN.name()),
-                        Accaunting.isCheckData((Constants.DATE_OUT.name())),
-                        Accaunting.isCheckVolume(Constants.VOLUME.name())));
+                        Accaunting.isCheckData(ParseCommLine.getArg(Constants.DATE_IN.name())),
+                        Accaunting.isCheckData(ParseCommLine.getArg(Constants.DATE_OUT.name())),
+                        Accaunting.isCheckVolume(ParseCommLine.getArg(Constants.VOLUME.name()))));
                 System.exit(0);
             } else {
                 System.exit(0);
