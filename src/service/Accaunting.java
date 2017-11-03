@@ -1,31 +1,24 @@
 package service;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Accaunting {
-    public static void checkParam(String dateIn, String dateOut, String volume){
-        if (isCheckData(dateIn) && isCheckData(dateOut)){
-            isCheckVolume(volume);
+    public static LocalDate isCheckData(String data){
+        try {
+            return LocalDate.parse(data);
+        } catch (DateTimeParseException e) {
+            System.exit(5);
+            return null;
         }
     }
 
-    private static boolean isCheckData(String data){
-        String pat = "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])";
-        Pattern p = Pattern.compile(pat);
-        Matcher m = p.matcher(data);
-        if (m.matches()) {
-            return true;
-        } else System.exit(5);
-        return false;
-    }
-
-    private static void isCheckVolume(String volume){
-        String pat = "[0-9]+";
-        Pattern p = Pattern.compile(pat);
-        Matcher m = p.matcher(volume);
-        if (!m.matches()) {
+    public static Integer isCheckVolume(String volume){
+        try {
+            return Integer.parseInt(volume);
+        } catch (NumberFormatException e) {
             System.exit(5);
+            return null;
         }
     }
 }

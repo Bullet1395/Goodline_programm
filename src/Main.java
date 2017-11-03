@@ -30,21 +30,16 @@ public class Main {
         ArrayList<Accounts> accounts = new ArrayList<>();
 
         if (ParseCommLine.isCheckOption("r") && ParseCommLine.isCheckOption("path")) {
-            Authorization.checkParam(authentUser, resources, ParseArgs.getArg(Constants.ROLE.name()), ParseArgs.getArg(Constants.PATH.name()));
+            Authorization.checkParam(authentUser, resources, ParseCommLine.getArg(Constants.ROLE.name()), ParseCommLine.getArg(Constants.PATH.name()));
 
-            if (ParseCommLine.isCheckOption("ds") && ParseCommLine.isCheckOption("de") && ParseCommLine.isCheckOption("v")) {
-                Accaunting.checkParam(ParseArgs.getArg(Constants.DATE_IN.name()),
-                        ParseArgs.getArg(Constants.DATE_OUT.name()),
-                        ParseArgs.getArg(Constants.VOLUME.name()));
-                try {
-                    accounts.add(new Accounts(
-                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getArg(Constants.DATE_IN.name())),
-                            new SimpleDateFormat("yyyy-MM-dd").parse(ParseArgs.getArg(Constants.DATE_OUT.name())),
-                            Integer.parseInt(ParseArgs.getArg(Constants.VOLUME.name()))));
-                    System.exit(0);
-                } catch (ParseException e){
-                    System.out.println("Неправильный формат ввода" + '\n' + e.getMessage());
-                }
+            if (ParseCommLine.isCheckOption("ds")
+                    && ParseCommLine.isCheckOption("de")
+                    && ParseCommLine.isCheckOption("v")) {
+                accounts.add(new Accounts(
+                        Accaunting.isCheckData(Constants.DATE_IN.name()),
+                        Accaunting.isCheckData((Constants.DATE_OUT.name())),
+                        Accaunting.isCheckVolume(Constants.VOLUME.name())));
+                System.exit(0);
             } else {
                 System.exit(0);
             }

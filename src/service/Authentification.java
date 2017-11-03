@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Authentification {
     public static Users logIn(ArrayList<Users> users) {
-        String autLog = ParseArgs.getArg(Constants.LOGIN.name());
+        String autLog = ParseCommLine.getArg(Constants.LOGIN.name());
         Users autUser = new Users(autLog, "pass");
 
         for (Users userInBase : users) {
@@ -17,7 +17,7 @@ public class Authentification {
             try {
                 if (autLog.equals(userLogin)) {
                     autUser.setSalt(userInBase.getSalt());
-                    autUser.setPassword(ParseArgs.getArg(Constants.PASSWORD.name()));
+                    autUser.setPassword(ParseCommLine.getArg(Constants.PASSWORD.name()));
                     checkUser(autUser, userInBase);
                     return autUser;
                 }

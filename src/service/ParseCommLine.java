@@ -93,6 +93,10 @@ public class ParseCommLine {
         return line.hasOption(optionName);
     }
 
+    public static String getArg(String arg) {
+        return getOption(arg.toLowerCase());
+    }
+
     private String printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Goodline application", "Справка",

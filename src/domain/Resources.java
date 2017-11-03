@@ -7,22 +7,21 @@ public class Resources {
     private Roles role;
     private String path;
 
-    public Resources(String user, Roles role, String path)
-    {
+    public Resources(String user, Roles role, String path) {
         this.user = user;
         this.role = role;
         this.path = path;
     }
 
-    public String getUser(){
+    public String getUser() {
         return this.user;
     }
 
-    public String getPath(){
+    public String getPath() {
         return this.path;
     }
 
-    public Enum<Roles> getRole(){
+    public Enum<Roles> getRole() {
         return this.role;
     }
 }
