@@ -15,9 +15,9 @@ public class Main {
         cmdArgs.parse(args);
 
         ArrayList<Users> users = new ArrayList<>();
-        users.add(new Users("User_Read", "123_r"));
-        users.add(new Users("User_Write", "123_w"));
-        users.add(new Users("User_Execute", "123_e"));
+        users.add(new Users("User_Read", "123_r", Users.setSalt()));
+        users.add(new Users("User_Write", "123_w", Users.setSalt()));
+        users.add(new Users("User_Execute", "123_e", Users.setSalt()));
 
         ArrayList<Resources> resources = new ArrayList<>();
         resources.add(new Resources("User_Read", Roles.READ, "C.R.RR"));
@@ -30,7 +30,11 @@ public class Main {
         ArrayList<Accounts> accounts = new ArrayList<>();
 
         if (ParseCommLine.isCheckOption("r") && ParseCommLine.isCheckOption("path")) {
-            Authorization.checkParam(authentUser, resources, ParseCommLine.getArg(Constants.ROLE.name()), ParseCommLine.getArg(Constants.PATH.name()));
+            Authorization.checkParam(
+                    authentUser,
+                    resources,
+                    ParseCommLine.getArg(Constants.ROLE.name()),
+                    ParseCommLine.getArg(Constants.PATH.name()));
 
             if (ParseCommLine.isCheckOption("ds")
                     && ParseCommLine.isCheckOption("de")
