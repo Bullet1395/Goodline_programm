@@ -16,12 +16,9 @@ public class Authorization {
      * @param path путь переданный из аргументов
      */
     public static void checkParam(Users user, List<Resources> resources, String role, String path) {
-        int iter = 0;
-        int iter2 = countInUser(resources, user.getLogin());
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
-                iter++;
-                if (isCheckAccess(role, path, res, iter, iter2)){
+                if (isCheckAccess(role, path, res, resources, user.getLogin())){
                     break;
                 }
             } else if (resources.indexOf(res) == resources.size()) {
@@ -31,22 +28,21 @@ public class Authorization {
     }
 
     /**
-     * Проверяет, есть ли пользователь в таблице с ресурсами
-     * т.е. есть ли на его имя какие-то записи
-     * и количество этих записей
+     * Проверяет являться ли ресурс с таким логином пользователя, последним в таблице
      *
      * @param resources коллекция с ресурсами(таблица)
      * @param user аутентифицированный пользователь(логин)
-     * @return количество записей в таблице с данным логином
+     * @param resource текущий проверяемый ресурс
+     * @return true или false
      */
-    private static int countInUser(List<Resources> resources, String user) {
-        int countUs = 0;
-        for (Resources res : resources) {
-            if (res.getUser().equals(user)) {
-                countUs++;
+    private static boolean isChechkLastUserIndex(List<Resources> resources, String user, Resources resource) {
+        int lastElemIndex = 0;
+        for (Resources res: resources) {
+            if (res.getUser().equals(user)){
+                lastElemIndex = resources.indexOf(res);
             }
         }
-        return countUs;
+        return lastElemIndex == resources.indexOf(resource);
     }
 
     /**
@@ -55,17 +51,21 @@ public class Authorization {
      * @param role роль переданная из аргументов
      * @param path путь переданный из аргументов
      * @param res проверяемый ресурс(запись из таблицы)
-     * @param iter
-     * @param iter2
+     * @param resources коллекция с ресурсами(таблица)
+     * @param user аутентифицированный пользователь(логин)
      * @return true или false
      */
-    private static boolean isCheckAccess(String role, String path, Resources res, int iter, int iter2){
+    private static boolean isCheckAccess(String role,
+                                         String path,
+                                         Resources res,
+                                         List<Resources> resources,
+                                         String user){
         if (Roles.isCheckInRole(role)) {
             if (isCheckPathRole(path, res)) {
-                if (isCheckRoleToResource(role, res, iter, iter2)){
+                if (isCheckRoleToResource(role, res, resources, user)){
                     return true;
                 }
-            } else if (iter == iter2) {
+            } else if (isChechkLastUserIndex(resources, user, res)) {
                 System.exit(4);
             }
         }
@@ -77,9 +77,11 @@ public class Authorization {
      * Если количество символов p1 >= p2 тогда идет сравнение путей.
      * у p2 остается столько символов сколько у p1, это позволяет реализоавть доступ ко всем внутренним папкам
      * с такой же ролью. Проверка на роль была уже пройдена другим методом.
-     * т.е. есть запись в таблице C.R.RR, а передалась C.R.RR.T.G.H. т.к. у нас есть доступ к RR, а все остальные это вложенные
+     * т.е. есть запись в таблице C.R.RR, а передалась C.R.RR.T.G.H. т.к. у нас есть доступ к RR,
+     * а все остальные это вложенные
      * ресурсы то к ним мы тоже получаем доступ.
-     * Если символов меньше, чем в записи таблицы, выходим из метода и проверяем следующую запись с таким именем пользователя
+     * Если символов меньше, чем в записи таблицы, выходим из метода и проверяем следующую запись
+     * с таким именем пользователя
      *
      * @param path путь переданный из аргументов
      * @param resource проверяемый ресурс(запись из таблицы)
@@ -99,18 +101,18 @@ public class Authorization {
      *
      * @param role роль переданная из аргументов
      * @param res проверяемый ресурс(запись из таблицы)
-     * @param iter
-     * @param iter2
+     * @param resources коллекция с ресурсами(таблица)
+     * @param user аутентифицированный пользователь(логин)
      * @return true если все проверено успешно, false иначе.
      */
-    private static boolean isCheckRoleToResource(String role, Resources res, int iter, int iter2){
+    private static boolean isCheckRoleToResource(String role, Resources res, List<Resources> resources, String user){
         /*
          * Задает роль полученную из параметров Roles.valueOf(role)
          * сравнивает с ролью у проверяемого ресурса res.getRole()
          */
         if (Roles.valueOf(role) == res.getRole()) {
             return true;
-        } else if (iter == iter2) {
+        } else if (isChechkLastUserIndex(resources, user, res)) {
             System.exit(4);
         }
         return false;
