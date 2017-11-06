@@ -10,7 +10,7 @@ import org.apache.commons.cli.HelpFormatter;
 
 public class ParseCommLine {
     private Options options;
-    private static CommandLine line;
+    private CommandLine line;
 
     public ParseCommLine() {
         options = new Options();
@@ -62,45 +62,18 @@ public class ParseCommLine {
                 .build());
     }
 
-    public void parse(String[] args) {
+    public CommandLine parse(String[] args) {
         try {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
             checkOptionHelp(args);
+            return line;
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         } catch (Exception e){
             printHelp();
         }
-    }
-
-    private void checkOptionHelp(String[] args) throws Exception {
-        if (line.hasOption("help") || args.length == 0) {
-            throw new Exception(printHelp());
-        }
-    }
-
-    private static String getOption(String optionName) {
-        String opt = "";
-
-        if (line.hasOption(optionName)) {
-            try {
-                opt = line.getOptionValue(optionName);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
-            return opt;
-        } else {
-            return opt;
-        }
-    }
-
-    public static boolean isCheckOption(String optionName){
-        return line.hasOption(optionName);
-    }
-
-    public static String getArg(String arg) {
-        return getOption(arg.toLowerCase());
+        return null;
     }
 
     private String printHelp() {
@@ -108,5 +81,11 @@ public class ParseCommLine {
         formatter.printHelp("Goodline application", "Справка",
                 options, "...");
         return formatter.toString();
+    }
+
+    private void checkOptionHelp(String[] args) throws Exception {
+        if (line.hasOption("help") || args.length == 0) {
+            throw new Exception(printHelp());
+        }
     }
 }

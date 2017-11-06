@@ -2,6 +2,7 @@ package service;
 
 import domain.Users;
 import domain.enums.Constants;
+import org.apache.commons.cli.CommandLine;
 
 import java.util.ArrayList;
 
@@ -13,16 +14,17 @@ public class Authentification {
      * @param users коллекция(таблица) с пользователями в программе
      * @return если проверка пройдена, возвращает аутентифицированного пользователя
      */
-    public static Users logIn(ArrayList<Users> users) {
-        String autLog = ParseCommLine.getArg(Constants.LOGIN.name());
+    public static Users logIn(ArrayList<Users> users, CommLineArgs arguments) {
+        String autLog = arguments.getArg(Constants.LOGIN.name());
 
         for (Users userInBase : users) {
             if (autLog.equals(userInBase.getLogin())) {
                 return checkUser(new Users(
                                 autLog,
-                                ParseCommLine.getArg(Constants.PASSWORD.name()),
+                                arguments.getArg(Constants.PASSWORD.name()),
                                 userInBase.getSalt()),
-                        userInBase);
+                        userInBase,
+                        arguments);
             }
         }
         System.exit(1);
@@ -36,13 +38,13 @@ public class Authentification {
      * @param userInBase пльзователь из таблицы с таким же логином
      * @return если проверка пройдена, возвращает аутентифицированного пользователя
      */
-    private static Users checkUser(Users autUser, Users userInBase){
+    private static Users checkUser(Users autUser, Users userInBase, CommLineArgs arguments){
         /*
          * Сравнивание паролей. Если совпадут то идет проверка на наличие других параметров в строке аргументов,
          * если их нету, то возвращает код 0. Если есть, возвращает пользоавтеля для авторизации.
          */
         if (autUser.getPassword().equals(userInBase.getPassword())) {
-            if (!ParseCommLine.isCheckOption("r") || !ParseCommLine.isCheckOption("path")) {
+            if (!CommLineArgs.isCheckArg(Constants.ROLE.name(), arguments) || !CommLineArgs.isCheckArg(Constants.PATH.name(), arguments)) {
                 System.exit(0);
             }
             return autUser;

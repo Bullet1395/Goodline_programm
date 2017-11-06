@@ -29,10 +29,9 @@ public class EncryptedPass {
             for (byte b : sha.digest()) {
                 hash.append(Integer.toString((b & 0xFF), 16));
             }
-
             return hash.toString();
         } catch (NoSuchAlgorithmException e) {
-            return e.getMessage();
+            return null;
         }
     }
 }

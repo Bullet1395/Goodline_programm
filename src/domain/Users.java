@@ -13,7 +13,7 @@ public class Users {
     public Users(String login, String password, String salt) {
         this.login = login;
         this.salt = salt;
-        this.password = password;
+        this.password = setPassword(password);
     }
 
     public String getLogin() {
@@ -29,7 +29,7 @@ public class Users {
     }
 
     /**
-     * ПОзволяет задавать salt через параметр
+     * Позволяет задавать salt через параметр
      *
      * @param salt salt
      */
@@ -53,9 +53,8 @@ public class Users {
      * Задает пароль и сохраняет его в hash виде
      *
      * @param password пароль
-     * @throws NoSuchAlgorithmException;
      */
-    public void setPassword(String password) throws NoSuchAlgorithmException {
-        this.password = EncryptedPass.hashPassword(password, salt);
+    private String setPassword(String password) {
+        return this.password = EncryptedPass.hashPassword(password, salt);
     }
 }
