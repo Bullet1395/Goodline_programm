@@ -5,6 +5,7 @@ import domain.enums.Constants;
 import domain.enums.Roles;
 import org.apache.commons.cli.CommandLine;
 import service.*;
+import service.security.EncryptedPass;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ public class Main {
         arguments.fillArgs(line);
 
         ArrayList<Users> users = new ArrayList<>();
-        users.add(new Users("User_Read", "123_r", Users.setSalt()));
-        users.add(new Users("User_Write", "123_w", Users.setSalt()));
-        users.add(new Users("User_Execute", "123_e", Users.setSalt()));
+        users.add(new Users("User_Read", "123_r", EncryptedPass.setSalt()));
+        users.add(new Users("User_Write", "123_w", EncryptedPass.setSalt()));
+        users.add(new Users("User_Execute", "123_e", EncryptedPass.setSalt()));
 
         ArrayList<Resources> resources = new ArrayList<>();
         resources.add(new Resources("User_Read", Roles.READ, "C.R.RR"));

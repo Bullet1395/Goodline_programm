@@ -1,9 +1,6 @@
 package domain;
 
 import service.security.EncryptedPass;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class Users {
     private String login;
@@ -13,7 +10,7 @@ public class Users {
     public Users(String login, String password, String salt) {
         this.login = login;
         this.salt = salt;
-        this.password = setPassword(password);
+        this.password = EncryptedPass.setPasswordHash(password, salt);
     }
 
     public String getLogin() {
@@ -35,26 +32,5 @@ public class Users {
      */
     public void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    /**
-     * Генерирует случайное значение salt и возвращает его
-     *
-     * @return массив байтов
-     */
-    public static String setSalt() {
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[16];
-        random.nextBytes(bytes);
-        return Arrays.toString(bytes);
-    }
-
-    /**
-     * Задает пароль и сохраняет его в hash виде
-     *
-     * @param password пароль
-     */
-    private String setPassword(String password) {
-        return this.password = EncryptedPass.hashPassword(password, salt);
     }
 }

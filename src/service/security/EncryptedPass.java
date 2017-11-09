@@ -2,6 +2,8 @@ package service.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Arrays;
 
 public class EncryptedPass {
     /**
@@ -18,7 +20,7 @@ public class EncryptedPass {
      * @param Salt salt
      * @return хэш пароля
      */
-    public static String hashPassword(String Password, String Salt) {
+    private static String hashPassword(String Password, String Salt) {
         try {
             StringBuilder hash = new StringBuilder();
             MessageDigest sha = MessageDigest.getInstance("SHA-512");
@@ -33,5 +35,26 @@ public class EncryptedPass {
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
+    }
+
+    /**
+     * Генерирует случайное значение salt и возвращает его
+     *
+     * @return массив байтов
+     */
+    public static String setSalt() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[16];
+        random.nextBytes(bytes);
+        return Arrays.toString(bytes);
+    }
+
+    /**
+     * Задает пароль и сохраняет его в hash виде
+     *
+     * @param password пароль
+     */
+    public static String setPasswordHash(String password, String salt) {
+        return EncryptedPass.hashPassword(password, salt);
     }
 }

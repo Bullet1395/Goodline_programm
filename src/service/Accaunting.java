@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Accaunting {
-    public static LocalDate isCheckData(String data){
+    public static LocalDate isCheckData(String date){
         try {
-            return LocalDate.parse(data);
+            return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
             System.exit(5);
             return null;
