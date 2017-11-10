@@ -62,21 +62,28 @@ public class ParseCommLine {
                 .build());
     }
 
-    public CommandLine parse(String[] args) {
+    public CommLineArgs parse(String[] args) {
         try {
             CommandLineParser parser = new DefaultParser();
             line = parser.parse(options, args);
             checkOptionHelp(args);
-            return line;
+            return new CommLineArgs()
+                    .withLogin(line.getOptionValue("login"))
+                    .withPassword(line.getOptionValue("password"))
+                    .withRole(line.getOptionValue("role"))
+                    .withPath(line.getOptionValue("path"))
+                    .withDateIn(line.getOptionValue("dateIn"))
+                    .withDateOut(line.getOptionValue("dateOut"))
+                    .withVolume(line.getOptionValue("volume"));
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             printHelp();
         }
         return null;
     }
 
-    private String printHelp() {
+    String printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Goodline application", "Справка",
                 options, "...");
