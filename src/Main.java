@@ -33,16 +33,13 @@ public class Main {
                     resources,
                     arguments.getRole(),
                     arguments.getPath());
-
-            if (arguments.isAccaunting()) {
-                accounts.add(new Accounts(
-                        Accaunting.isCheckData(arguments.getDateIn()),
-                        Accaunting.isCheckData(arguments.getDateOut()),
-                        Accaunting.isCheckVolume(arguments.getVolume())));
-                System.exit(0);
-            } else {
-                System.exit(0);
-            }
         }
+        if (arguments.isAccaunting()) {
+            accounts.add(new Accounts(
+                    Accaunting.isCheckDate(arguments.getDateIn()),
+                    Accaunting.isCheckDate(arguments.getDateOut()),
+                    Accaunting.isCheckVolume(arguments.getVolume())));
+        }
+        System.exit(0);
     }
 }

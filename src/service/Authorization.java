@@ -18,31 +18,15 @@ public class Authorization {
     public static void checkParam(Users user, List<Resources> resources, String role, String path) {
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
-                if (isCheckAccess(role, path, res, resources, user.getLogin())){
+                if (isCheckAccess(role, path, res)) {
                     break;
+                } else if (res.equals(resources.get(resources.size() - 1))) {
+                    System.exit(4);
                 }
-            } else if (resources.indexOf(res) == resources.size()) {
-                System.exit(1);
+            } else if (res.equals(resources.get(resources.size() - 1))) {
+                System.exit(4);
             }
         }
-    }
-
-    /**
-     * Проверяет являться ли ресурс с таким логином пользователя, последним в таблице
-     *
-     * @param resources коллекция с ресурсами(таблица)
-     * @param user аутентифицированный пользователь(логин)
-     * @param resource текущий проверяемый ресурс
-     * @return true или false
-     */
-    private static boolean isChechkLastUserIndex(List<Resources> resources, String user, Resources resource) {
-        int lastElemIndex = 0;
-        for (Resources res: resources) {
-            if (res.getUser().equals(user)){
-                lastElemIndex = resources.indexOf(res);
-            }
-        }
-        return lastElemIndex == resources.indexOf(resource);
     }
 
     /**
@@ -51,21 +35,18 @@ public class Authorization {
      * @param role роль переданная из аргументов
      * @param path путь переданный из аргументов
      * @param res проверяемый ресурс(запись из таблицы)
-     * @param resources коллекция с ресурсами(таблица)
-     * @param user аутентифицированный пользователь(логин)
      * @return true или false
      */
     private static boolean isCheckAccess(String role,
                                          String path,
-                                         Resources res,
-                                         List<Resources> resources,
-                                         String user) {
+                                         Resources res) {
         if (Roles.isCheckInRole(role)) {
             if (isCheckPathRole(path, res)) {
-                isCheckRoleToResource(role, res, resources, user);
-                return true;
-            } else if (isChechkLastUserIndex(resources, user, res)) {
-                System.exit(4);
+                if (Roles.valueOf(role) == res.getRole()) {
+                    return true;
+                } else {
+                    System.exit(4);
+                }
             }
         }
         return false;
@@ -93,25 +74,5 @@ public class Authorization {
             return pathResourceFromArg.equals((pathResource));
         }
         return false;
-    }
-
-    /**
-     * Проверка роли ресурса
-     *
-     * @param role роль переданная из аргументов
-     * @param res проверяемый ресурс(запись из таблицы)
-     * @param resources коллекция с ресурсами(таблица)
-     * @param user аутентифицированный пользователь(логин)
-     */
-    private static void isCheckRoleToResource(String role, Resources res, List<Resources> resources, String user){
-        /*
-         * Задает роль полученную из параметров Roles.valueOf(role)
-         * сравнивает с ролью у проверяемого ресурса res.getRole()
-         */
-        if (Roles.valueOf(role) != res.getRole()) {
-            if (isChechkLastUserIndex(resources, user, res)) {
-                System.exit(4);
-            }
-        }
     }
 }

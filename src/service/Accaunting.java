@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Accaunting {
-    public static LocalDate isCheckData(String date){
+    public static LocalDate isCheckDate(String date){
         try {
             return LocalDate.parse(date);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | NullPointerException e) {
             System.exit(5);
             return null;
         }
@@ -16,7 +16,7 @@ public class Accaunting {
     public static Integer isCheckVolume(String volume){
         try {
             return Integer.parseInt(volume);
-        } catch (NumberFormatException e) {
+        } catch (DateTimeParseException | NullPointerException  | NumberFormatException e) {
             System.exit(5);
             return null;
         }

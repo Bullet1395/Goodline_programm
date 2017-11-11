@@ -72,8 +72,8 @@ public class ParseCommLine {
                     .withPassword(line.getOptionValue("password"))
                     .withRole(line.getOptionValue("role"))
                     .withPath(line.getOptionValue("path"))
-                    .withDateIn(line.getOptionValue("dateIn"))
-                    .withDateOut(line.getOptionValue("dateOut"))
+                    .withDateIn(line.getOptionValue("date_in"))
+                    .withDateOut(line.getOptionValue("date_out"))
                     .withVolume(line.getOptionValue("volume"));
         } catch (ParseException e) {
             System.out.println(e.getMessage());
