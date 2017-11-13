@@ -15,10 +15,9 @@ public enum Roles {
         for (Roles r : Roles.values()) {
             if (r.name().equals(role)) {
                 return true;
-            } else if (Roles.valueOf(r.name()).ordinal() == Roles.values().length - 1) {
-                System.exit(3);
             }
         }
+        System.exit(3);
         return false;
     }
 }
