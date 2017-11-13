@@ -24,7 +24,7 @@ public class Main {
         resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
-        Users authentUser = Authentification.logIn(users, arguments);
+        Users authentUser = Authentication.logIn(users, arguments);
         ArrayList<Accounts> accounts = new ArrayList<>();
 
         if (arguments.isAuthorization()) {
@@ -36,9 +36,9 @@ public class Main {
         }
         if (arguments.isAccaunting()) {
             accounts.add(new Accounts(
-                    Accaunting.isCheckDate(arguments.getDateIn()),
-                    Accaunting.isCheckDate(arguments.getDateOut()),
-                    Accaunting.isCheckVolume(arguments.getVolume())));
+                    Accounting.isCheckDate(arguments.getDateIn()),
+                    Accounting.isCheckDate(arguments.getDateOut()),
+                    Accounting.isCheckVolume(arguments.getVolume())));
         }
         System.exit(0);
     }

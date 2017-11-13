@@ -10,42 +10,37 @@ public class Authorization {
     /**
      * Проверяет параметры для авторизации
      *
-     * @param user аутентифицированный пользователь(логин)
+     * @param user      аутентифицированный пользователь(логин)
      * @param resources коллекция с ресурсами(таблица)
-     * @param role роль переданная из аргументов
-     * @param path путь переданный из аргументов
+     * @param role      роль переданная из аргументов
+     * @param path      путь переданный из аргументов
      */
     public static void checkParam(Users user, List<Resources> resources, String role, String path) {
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
                 if (isCheckAccess(role, path, res)) {
-                    break;
-                } else if (res.equals(resources.get(resources.size() - 1))) {
-                    System.exit(4);
+                    return;
                 }
-            } else if (res.equals(resources.get(resources.size() - 1))) {
-                System.exit(4);
             }
         }
+        System.exit(4);
     }
 
     /**
      * Проверяет доступ к ресурсу
      *
-     * @param role роль переданная из аргументов
-     * @param path путь переданный из аргументов
-     * @param res проверяемый ресурс(запись из таблицы)
+     * @param role      роль переданная из аргументов
+     * @param path      путь переданный из аргументов
+     * @param res       проверяемый ресурс(запись из таблицы)
      * @return true или false
      */
     private static boolean isCheckAccess(String role,
                                          String path,
                                          Resources res) {
         if (Roles.isCheckInRole(role)) {
-            if (isCheckPathRole(path, res)) {
-                if (Roles.valueOf(role) == res.getRole()) {
+            if (isCheckRoleToResource(role, res)) {
+                if (isCheckPathRole(path, res)) {
                     return true;
-                } else {
-                    System.exit(4);
                 }
             }
         }
@@ -63,7 +58,7 @@ public class Authorization {
      * Если символов меньше, чем в записи таблицы, выходим из метода и проверяем следующую запись
      * с таким именем пользователя
      *
-     * @param path путь переданный из аргументов
+     * @param path     путь переданный из аргументов
      * @param resource проверяемый ресурс(запись из таблицы)
      * @return true или false
      */
@@ -74,5 +69,22 @@ public class Authorization {
             return pathResourceFromArg.equals((pathResource));
         }
         return false;
+    }
+
+    /**
+     * Проверка роли у ресурса
+     *
+     * @param role      роль переданная из аргументов
+     * @param res       проверяемый ресурс(запись из таблицы)
+     */
+    private static boolean isCheckRoleToResource(String role, Resources res) {
+        /*
+         * Задает роль полученную из параметров Roles.valueOf(role)
+         * сравнивает с ролью у проверяемого ресурса res.getRole()
+         */
+        if (Roles.valueOf(role) != res.getRole()) {
+            System.exit(4);
+        }
+        return true;
     }
 }

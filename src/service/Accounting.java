@@ -3,7 +3,7 @@ package service;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Accaunting {
+public class Accounting {
     public static LocalDate isCheckDate(String date){
         try {
             return LocalDate.parse(date);

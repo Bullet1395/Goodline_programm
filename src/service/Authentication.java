@@ -4,7 +4,7 @@ import domain.Users;
 
 import java.util.ArrayList;
 
-public class Authentification {
+public class Authentication {
     /**
      * Метод для аутентификации пользователя.
      * Проверяет входные данне со всеми пользователями в коллекции
