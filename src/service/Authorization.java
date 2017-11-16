@@ -37,14 +37,9 @@ public class Authorization {
     private static boolean isCheckAccess(String role,
                                          String path,
                                          Resources res) {
-        if (Roles.isCheckInRole(role)) {
-            if (isCheckRoleToResource(role, res)) {
-                if (isCheckPathRole(path, res)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return Roles.isCheckInRole(role) &&
+                isCheckRoleToResource(role, res) &&
+                isCheckPathRole(path, res);
     }
 
     /**
