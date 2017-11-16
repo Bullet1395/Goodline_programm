@@ -18,7 +18,7 @@ public class Authorization {
     public static void checkParam(Users user, List<Resources> resources, String role, String path) {
         for (Resources res : resources) {
             if (user.getLogin().equals(res.getUser())) {
-                if (isCheckAccess(role, path, res)) {
+                if (isCheckAccess(Roles.isCheckInRole(role), path, res)) {
                     return;
                 }
             }
@@ -34,11 +34,10 @@ public class Authorization {
      * @param res       проверяемый ресурс(запись из таблицы)
      * @return true или false
      */
-    private static boolean isCheckAccess(String role,
+    private static boolean isCheckAccess(Roles role,
                                          String path,
                                          Resources res) {
-        return Roles.isCheckInRole(role) &&
-                isCheckRoleToResource(role, res) &&
+        return isCheckRoleToResource(role, res) &&
                 isCheckPathRole(path, res);
     }
 
@@ -72,12 +71,11 @@ public class Authorization {
      * @param role      роль переданная из аргументов
      * @param res       проверяемый ресурс(запись из таблицы)
      */
-    private static boolean isCheckRoleToResource(String role, Resources res) {
+    private static boolean isCheckRoleToResource(Roles role, Resources res) {
         /*
-         * Задает роль полученную из параметров Roles.valueOf(role)
          * сравнивает с ролью у проверяемого ресурса res.getRole()
          */
-        if (Roles.valueOf(role) != res.getRole()) {
+        if (role != res.getRole()) {
             System.exit(4);
         }
         return true;
