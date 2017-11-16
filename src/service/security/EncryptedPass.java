@@ -16,16 +16,16 @@ public class EncryptedPass {
      * с   - 1237be4bc089863f2e58f72ff1cd8fe843d90ea69ac51eb6e72df5bd8....
      * radix 16 - система счисления 16-ричная
      *
-     * @param Password пароль для хэширования
-     * @param Salt salt
+     * @param password пароль для хэширования
+     * @param salt salt
      * @return хэш пароля
      */
-    private static String hashPassword(String Password, String Salt) {
+    private static String hashPassword(String password, byte salt) {
         try {
             StringBuilder hash = new StringBuilder();
             MessageDigest sha = MessageDigest.getInstance("SHA-512");
 
-            sha.update((Password + Salt).getBytes());
+            sha.update((password + salt).getBytes());
             sha.update(sha.digest());
 
             for (byte b : sha.digest()) {
