@@ -12,16 +12,4 @@ public class Accounts {
         this.dateOut = dateOut;
         this.volume = volume;
     }
-
-    public void setDateIn(LocalDate dateIn){
-        this.dateIn = dateIn;
-    }
-
-    public void setDateOut(LocalDate dateOut){
-        this.dateOut = dateOut;
-    }
-
-    public void setVolume(int volume){
-        this.volume = volume;
-    }
 }

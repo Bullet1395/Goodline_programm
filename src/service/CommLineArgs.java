@@ -72,15 +72,15 @@ public class CommLineArgs {
         return this;
     }
 
-    boolean isAuthentification(){
+    boolean isAuthentication(){
         return login != null && password != null;
     }
 
     public boolean isAuthorization(){
-        return isAuthentification() && role != null && path != null;
+        return isAuthentication() && role != null && path != null;
     }
 
-    public boolean isAccaunting() {
+    public boolean isAccounting() {
         return isAuthorization() && dateIn != null && dateOut != null && volume !=null;
     }
 }

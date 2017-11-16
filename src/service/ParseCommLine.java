@@ -76,23 +76,20 @@ public class ParseCommLine {
                     .withDateOut(line.getOptionValue("date_out"))
                     .withVolume(line.getOptionValue("volume"));
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
             printHelp();
         }
         return null;
     }
 
-    String printHelp() {
+    void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Goodline application", "Справка",
                 options, "...");
-        return formatter.toString();
     }
 
-    private void checkOptionHelp(String[] args) throws Exception {
+    private void checkOptionHelp(String[] args) {
         if (line.hasOption("help") || args.length == 0) {
-            throw new Exception(printHelp());
+            printHelp();
         }
     }
 }

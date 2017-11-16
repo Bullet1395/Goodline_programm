@@ -14,7 +14,7 @@ public class Authentication {
      */
     public static Users logIn(ArrayList<Users> users, CommLineArgs arguments) {
         try {
-            if (arguments.isAuthentification()) {
+            if (arguments.isAuthentication()) {
                 String autLog = arguments.getLogin();
                 for (Users userInBase : users) {
                     if (autLog.equals(userInBase.getLogin())) {

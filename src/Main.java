@@ -34,7 +34,7 @@ public class Main {
                     arguments.getRole(),
                     arguments.getPath());
         }
-        if (arguments.isAccaunting()) {
+        if (arguments.isAccounting()) {
             accounts.add(new Accounts(
                     Accounting.isCheckDate(arguments.getDateIn()),
                     Accounting.isCheckDate(arguments.getDateOut()),

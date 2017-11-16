@@ -24,13 +24,4 @@ public class Users {
     public String getSalt() {
         return this.salt;
     }
-
-    /**
-     * Позволяет задавать salt через параметр
-     *
-     * @param salt salt
-     */
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
 }
