@@ -20,18 +20,23 @@ public class EncryptedPass {
      * @param salt salt
      * @return хэш пароля
      */
-    private static String hashPassword(String password, byte salt) {
+    private static String hashPassword(String password, String salt) {
         try {
             StringBuilder hash = new StringBuilder();
+            StringBuilder hashHashPassSalt = new StringBuilder();
             MessageDigest sha = MessageDigest.getInstance("SHA-512");
 
             sha.update((password + salt).getBytes());
-            sha.update(sha.digest());
-
             for (byte b : sha.digest()) {
                 hash.append(Integer.toString((b & 0xFF), 16));
             }
-            return hash.toString();
+
+            sha.update(hash.toString().getBytes());
+            for (byte b : sha.digest()) {
+                hashHashPassSalt.append(Integer.toString((b & 0xFF), 16));
+            }
+
+            return hashHashPassSalt.toString();
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
@@ -40,13 +45,17 @@ public class EncryptedPass {
     /**
      * Генерирует случайное значение salt и возвращает его
      *
-     * @return массив байтов
+     * @return salt
      */
     public static String setSalt() {
+        StringBuilder salt = new StringBuilder();
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
         random.nextBytes(bytes);
-        return Arrays.toString(bytes);
+        for (byte b : bytes) {
+            salt.append(Integer.toString((b & 0xFF), 16));
+        }
+        return salt.toString();
     }
 
     /**
