@@ -14,21 +14,19 @@ public class Authentication {
      */
     public static Users logIn(ArrayList<Users> users, CommLineArgs arguments) {
         try {
-            if (arguments.isAuthentication()) {
-                String autLog = arguments.getLogin();
-                for (Users userInBase : users) {
-                    if (autLog.equals(userInBase.getLogin())) {
-                        return checkUser(new Users(
-                                        autLog,
-                                        arguments.getPassword(),
-                                        userInBase.getSalt()),
-                                userInBase);
-                    }
+            String autLog = arguments.getLogin();
+            for (Users userInBase : users) {
+                if (autLog.equals(userInBase.getLogin())) {
+                    return checkUser(new Users(
+                                    autLog,
+                                    arguments.getPassword(),
+                                    userInBase.getSalt()),
+                            userInBase);
                 }
             }
             new ParseCommLine().printHelp();
             System.exit(1);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             new ParseCommLine().printHelp();
             System.exit(1);
         }

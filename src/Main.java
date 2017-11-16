@@ -24,9 +24,12 @@ public class Main {
         resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
 
-        Users authentUser = Authentication.logIn(users, arguments);
+        Users authentUser = null;
         ArrayList<Accounts> accounts = new ArrayList<>();
 
+        if (arguments.isAuthentication()) {
+            authentUser = Authentication.logIn(users, arguments);
+        }
         if (arguments.isAuthorization()) {
             Authorization.checkParam(
                     authentUser,

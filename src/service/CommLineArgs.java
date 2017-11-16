@@ -72,7 +72,7 @@ public class CommLineArgs {
         return this;
     }
 
-    boolean isAuthentication(){
+    public boolean isAuthentication(){
         return login != null && password != null;
     }
 
