@@ -21,7 +21,7 @@ public class Resources {
         return this.path;
     }
 
-    public Enum<Roles> getRole() {
+    public Roles getRole() {
         return this.role;
     }
 }

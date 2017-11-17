@@ -9,7 +9,7 @@ public class CommLineArgs {
     private String dateOut;
     private String volume;
 
-    String getLogin() {
+    public String getLogin() {
         return login;
     }
 
@@ -18,7 +18,7 @@ public class CommLineArgs {
         return this;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 

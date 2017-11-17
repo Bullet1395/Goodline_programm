@@ -12,14 +12,13 @@ public class Authentication {
      * @param users коллекция(таблица) с пользователями в программе
      * @return если проверка пройдена, возвращает аутентифицированного пользователя
      */
-    public static Users logIn(ArrayList<Users> users, CommLineArgs arguments) {
+    public static Users logIn(ArrayList<Users> users, String login, String password) {
         try {
-            String autLog = arguments.getLogin();
             for (Users userInBase : users) {
-                if (autLog.equals(userInBase.getLogin())) {
+                if (login.equals(userInBase.getLogin())) {
                     return checkUser(new Users(
-                                    autLog,
-                                    arguments.getPassword(),
+                                    login,
+                                    password,
                                     userInBase.getSalt()),
                             userInBase);
                 }

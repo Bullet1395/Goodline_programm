@@ -48,7 +48,7 @@ public class EncryptedPass {
      *
      * @return salt
      */
-    public static String setSalt() {
+    public static String getSalt() {
         StringBuilder salt = new StringBuilder();
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
