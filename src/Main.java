@@ -17,12 +17,21 @@ public class Main {
         users.add(new Users("User_Write", "123_w", EncryptedPass.getSalt()));
         users.add(new Users("User_Execute", "123_e", EncryptedPass.getSalt()));
 
+        users.add(new Users( "jdoe", "sup3rpaZZ", EncryptedPass.getSalt()));
+        users.add(new Users("jrow",  "Qweqrty12", EncryptedPass.getSalt()));
+        users.add(new Users("xxx", "yyy", EncryptedPass.getSalt()));
+
         ArrayList<Resources> resources = new ArrayList<>();
         resources.add(new Resources("User_Read", Roles.READ, "C.R.RR"));
         resources.add(new Resources("User_Read", Roles.READ, "C.W.WR.R"));
         resources.add(new Resources("User_Write", Roles.WRITE, "C.W.WR"));
         resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
         resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
+
+        resources.add(new Resources("jdoe", Roles.READ, "a"));
+        resources.add(new Resources("jdoe", Roles.WRITE, "a.b"));
+        resources.add(new Resources("jrow", Roles.EXECUTE, "a.b.c"));
+        resources.add(new Resources("jdoe", Roles.EXECUTE, "a.bc"));
 
         Users authentUser = null;
         ArrayList<Accounts> accounts = new ArrayList<>();
