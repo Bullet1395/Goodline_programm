@@ -3,7 +3,6 @@ package service.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class EncryptedPass {
     /**
@@ -22,24 +21,26 @@ public class EncryptedPass {
      */
     private static String hashPassword(String password, String salt) {
         try {
-            StringBuilder hash = new StringBuilder();
-            StringBuilder hashHashPassSalt = new StringBuilder();
+            String hash;
             MessageDigest sha = MessageDigest.getInstance("SHA-512");
 
-            sha.update((password + salt).getBytes());
-            for (byte b : sha.digest()) {
-                hash.append(Integer.toString((b & 0xFF), 16));
-            }
+            hash = doHash(password + salt, sha);
 
-            sha.update(hash.toString().getBytes());
-            for (byte b : sha.digest()) {
-                hashHashPassSalt.append(Integer.toString((b & 0xFF), 16));
-            }
-
-            return hashHashPassSalt.toString();
+            return doHash(hash, sha);
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
+    }
+
+    private static String doHash(String text, MessageDigest sha) {
+        StringBuilder hash = new StringBuilder();
+
+        sha.update(text.getBytes());
+        for (byte b : sha.digest()) {
+            hash.append(Integer.toString((b & 0xFF), 16));
+        }
+
+        return hash.toString();
     }
 
     /**
