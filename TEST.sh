@@ -22,7 +22,7 @@ echo "Параметры тестирования: -l User_Read -p 123_r"
 echo "Должен завершиться 0 = $?"
 
 
-bash RUN.sh -l User_Write -p 123_w
+bash h -l URUN.sser_Write -p 123_w
 if [[ $? -eq 0 ]]; then
 TEST_OK=$(( $TEST_OK+1 ))
 fi
