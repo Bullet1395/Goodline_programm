@@ -183,7 +183,6 @@ echo "Завершенных успешно       - $TEST_OK"
 echo "Заврешенных отрицательно  - $TEST_FAIL"
 echo "Всего тестов              - $TEST_COUNT"
 
-
 if [[ $TEST_OK -eq $TEST_COUNT ]]; then
 exit 0
 fi
