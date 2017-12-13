@@ -178,7 +178,6 @@ fi
 echo "Параметры тестирования: -l User_Read -p 123_r -r READ -path C.R.RR -ds 10.11.17 -de 10.11.17 -v 100"
 echo "Должен завершиться 5 = $RESULT_TEST"
 
-
 echo "Завершенных успешно       - $TEST_OK"
 echo "Заврешенных отрицательно  - $TEST_FAIL"
 echo "Всего тестов              - $TEST_COUNT"
