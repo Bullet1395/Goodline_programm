@@ -170,7 +170,6 @@ echo "Параметры тестирования: -l User_Write -p 123_w -r WRI
 echo "Должен завершиться 5 = $RESULT_TEST"
 
 
-
 bash RUN.sh -l User_Read -p 123_r -r READ -path C.R.RR -ds 10.11.17 -de 10.11.17 -v 100
 RESULT_TEST=$?
 if [[ $RESULT_TEST -eq 5 ]]; then
