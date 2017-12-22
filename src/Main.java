@@ -33,15 +33,15 @@ public class Main {
         resources.add(new Resources("jrow", Roles.EXECUTE, "a.b.c"));
         resources.add(new Resources("jdoe", Roles.EXECUTE, "a.bc"));
 
-        Users authentUser = null;
+        Users authenticationUser = null;
         ArrayList<Accounts> accounts = new ArrayList<>();
 
         if (arguments.isAuthentication()) {
-            authentUser = Authentication.logIn(users, arguments.getLogin(), arguments.getPassword());
+            authenticationUser = Authentication.logIn(users, arguments.getLogin(), arguments.getPassword());
         }
         if (arguments.isAuthorization()) {
             Authorization.checkParam(
-                    authentUser,
+                    authenticationUser,
                     resources,
                     arguments.getRole(),
                     arguments.getPath());
