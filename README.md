@@ -8,6 +8,9 @@
    1. [Первый набор требований](https://docs.google.com/document/d/1VOqiari-MJ_Cbh8ljlD6u2jHOJuORKzbYmNFDWBYCnc/edit)  
    2. [Второй набор требований]()  
     
+###Тестирование проекта на сервисе travis-ci.org
+   [Travis CI](https://travis-ci.org/Bullet1395/Goodline_programm.svg?branch=master)    
+    
 ## Набор инструкций по сборке проекта: 
 
 Чтобы собрать проект в файл с расширением **jar**, требуется произвести запуск файла: **BUILD.sh** при помощи специальной команды: **./BUILD.sh**, которая должна вводится из коммандной строки. Реузльтатом работы команды будет файл: **GoodLineCLI.jar**. 
