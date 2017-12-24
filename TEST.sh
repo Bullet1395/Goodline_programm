@@ -11,10 +11,10 @@ RESULT_TEST=$?
 if [[ $RESULT_TEST == "$2" ]]
     echo
         then
-        echo "Тест завершен. Результат: $RESULT_TEST"
+        echo "Тест завершен. Результаты: $2 = $RESULT_TEST"
         TEST_OK=$(( $TEST_OK+1 ))
 else
-    echo "Тест провален. Результат: $RESULT_TEST"
+    echo "Тест провален. Результаты: $2 = $RESULT_TEST"
     TEST_FAIL=$(( $TEST_FAIL+1 ))
 fi
 }
