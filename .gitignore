@@ -1,3 +1,5 @@
+$ cat .gitignore
+
 .idea/
 out/
 outHand/
