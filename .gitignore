@@ -1,8 +1,7 @@
-/idea
-/lib
-/out
-/outHand
-Goodline_programm.jar
-*.iml
+.idea/
+out/
+outHand/
+/Goodline_programm.jar
+/**.iml
 
 
