@@ -7,9 +7,13 @@
 ### Ссылки на наборы требований:  
    1. [Первый набор требований](Requirements1.md)  
    2. [Второй набор требований](Requirements2.md)  
+   
+### Планы
+   1. [План 1](Roadmap1.md) 
+   2. [План 2](Roadmap2.md)
     
 ### Тестирование проекта на сервисе travis-ci.org
-   1. [Build status](https://travis-ci.org/Bullet1395/Goodline_programm.svg?branch=master)
+   1. ![Build status](https://travis-ci.org/Bullet1395/Goodline_programm.svg?branch=master)
    2. [Travis CI](https://travis-ci.org/Bullet1395/Goodline_programm?utm_source=email&utm_medium=notification)    
     
 ### Набор инструкций по сборке проекта: 
