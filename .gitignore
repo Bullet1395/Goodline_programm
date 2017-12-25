@@ -1,9 +1,7 @@
-$ cat .gitignore
-
 .idea/
 out/
 outHand/
 /Goodline_programm.jar
-/**.iml
+*.iml
 
 
