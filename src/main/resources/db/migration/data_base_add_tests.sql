@@ -1,0 +1,1 @@
+INSERT into USERS (LOGIN, HASH_PASSWORD, SALT) VALUES ('User_Read', , );

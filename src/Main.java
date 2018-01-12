@@ -2,6 +2,7 @@ import domain.Accounts;
 import domain.Resources;
 import domain.Users;
 import domain.enums.Roles;
+import org.flywaydb.core.Flyway;
 import service.*;
 import service.security.EncryptedPass;
 
@@ -9,8 +10,17 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        Log logger = new Log();
+        logger.traceLogging("Start application");
+
+        Flyway flyway = new Flyway();
+        flyway.setDataSource("jdbc:h2:file:./target/foobar", "sa", null);
+        flyway.migrate();
+
         ParseCommLine cmdArgs = new ParseCommLine();
         CommLineArgs arguments = cmdArgs.parse(args);
+
+        logger.traceLogging("Arguments application: \n" + arguments.toString());
 
         ArrayList<Users> users = new ArrayList<>();
         users.add(new Users("User_Read", "123_r", EncryptedPass.getSalt()));
