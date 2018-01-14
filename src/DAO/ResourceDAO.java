@@ -25,6 +25,7 @@ public class ResourceDAO {
 
     public Resources getResource(String resource, String role) throws SQLException {
         String findResource = "";
+
         try {
             String[] arrayOfResource = resource.split("\\.");
 
@@ -44,11 +45,6 @@ public class ResourceDAO {
                 }
 
                 findResource += ".";
-
-                if (!resultSet.next()) {
-                    logger.debug("Данных не найдено.");
-                    return null;
-                }
             }
 
         } catch (SQLException e) {
@@ -57,4 +53,5 @@ public class ResourceDAO {
         }
         return null;
     }
+
 }

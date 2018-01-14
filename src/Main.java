@@ -27,7 +27,6 @@ public class Main {
         logger.trace("Начало миграции");
         try {
             Flyway flyway = new Flyway();
-            flyway.setLocations("src/main/resources/db/migration");
             flyway.setDataSource(contextDAO.getDbUrl(),
                     contextDAO.getDbUserName(),
                     contextDAO.getDbPassword());
@@ -40,7 +39,12 @@ public class Main {
         ParseCommLine cmdArgs = new ParseCommLine();
         CommLineArgs arguments = cmdArgs.parse(args);
 
-        logger.trace("Arguments application: \n" + arguments.toString());
+        String buf = new String();
+        logger.trace("Arguments application: ");
+        for (String arg: args) {
+            buf += arg + " ";
+        }
+        logger.trace(buf);
 
         try (Connection connection = contextDAO.getConnection()) {
             logger.trace("Подключение к базе данных установлено");
@@ -75,7 +79,7 @@ public class Main {
             logger.trace("Запускается аккаунтинг");
             Accounting accounting = new Accounting();
             Accounts account = new Accounts();
-            if (accounting.isAccounting(account, resourceDAO, arguments, isAuthorization)) {
+            if (accounting.isAccounting(account, arguments, isAuthorization)) {
                 accountDAO.addAccountsUser(account);
                 logger.info("Аккаунтинг прошел успешно");
             }

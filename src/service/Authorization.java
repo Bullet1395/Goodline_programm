@@ -50,6 +50,7 @@ public class Authorization {
             }
             return true;
         }
+        logger.trace("Авторизация не пройдена. Нет аругментов.");
         return false;
     }
 }

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class UsersDAO {
     private static final Logger logger = LogManager.getLogger(UsersDAO.class.getName());
 
-    private static final String sqlSelectUsers = "SELECT * FROM USERS WHERE USER_LOGIN = ?";
+    private static final String sqlSelectUsers = "SELECT * FROM USERS WHERE LOGIN = ?";
 
     private Connection connection;
 

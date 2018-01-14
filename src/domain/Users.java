@@ -10,7 +10,7 @@ public class Users {
     public Users(String login, String password, String salt) {
         this.login = login;
         this.salt = salt;
-        this.password = EncryptedPass.setPasswordHash(password, salt);
+        this.password = password;
     }
 
     public String getLogin() {
