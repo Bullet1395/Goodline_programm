@@ -1,54 +1,33 @@
 package service;
 
-import domain.Users;
+import DAO.UsersDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 public class Authentication {
-    /**
-     * Метод для аутентификации пользователя.
-     * Проверяет входные данне со всеми пользователями в коллекции
-     * 
-     * @param users коллекция(таблица) с пользователями в программе
-     * @return если проверка пройдена, возвращает аутентифицированного пользователя
-     */
-    public static Users logIn(ArrayList<Users> users, String login, String password) {
-        try {
-            for (Users userInBase : users) {
-                if (login.equals(userInBase.getLogin())) {
-                    return checkUser(new Users(
-                                    login,
-                                    password,
-                                    userInBase.getSalt()),
-                            userInBase);
-                }
-            }
-            new ParseCommLine().printHelp();
-            System.exit(1);
-        } catch (NullPointerException e) {
-            new ParseCommLine().printHelp();
-            System.exit(1);
-        }
-        return null;
-    }
+    private static final Logger logger = LogManager.getLogger(Authentication.class.getName());
 
     /**
-     * Проверяет данные введенные для аутентификации с данными в таблице
+     * Проверка аутентификации пользователя
      *
-     * @param autUser созданный пользователь с данными из параметров коммандной строки для проверки с данными в таблице
-     * @param userInBase пльзователь из таблицы с таким же логином
-     * @return если проверка пройдена, возвращает аутентифицированного пользователя
+     * @param userDAO - пользователь из БД
+     * @param login - логин полученный из аругментов
+     * @param password - пароль полученный из аргументов
+     * @return true, если пользователь аутентифицирован
      */
-    private static Users checkUser(Users autUser, Users userInBase){
-        /*
-         * Сравнивание паролей. Если совпадут то идет проверка на наличие других параметров в строке аргументов,
-         * если их нету, то возвращает код 0. Если есть, возвращает пользоавтеля для авторизации.
-         */
-        if (autUser.getPassword().equals(userInBase.getPassword())) {
-            return autUser;
-        } else {
+     public boolean isAuthentication(UsersDAO userDAO, String login, String password) throws SQLException {
+        ContextDB contextDB = new ContextDB();
+        if (!contextDB.searchUserInDB(userDAO, login)) {
+            logger.error("Пользователь не найден");
+            System.exit(1);
+        }
+
+        if (!contextDB.validHashPassword(userDAO, login, password)) {
+            logger.error("Неверный пароль");
             System.exit(2);
         }
-        return null;
+        return true;
     }
 }

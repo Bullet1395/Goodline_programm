@@ -1,67 +1,88 @@
+import DAO.AccountsDAO;
+import DAO.ContextDAO;
+import DAO.ResourceDAO;
+import DAO.UsersDAO;
 import domain.Accounts;
-import domain.Resources;
-import domain.Users;
-import domain.enums.Roles;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;
 import service.*;
-import service.security.EncryptedPass;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) {
-        Log logger = new Log();
-        logger.traceLogging("Start application");
+    private static final Logger logger = LogManager.getLogger(UsersDAO.class.getName());
 
-        Flyway flyway = new Flyway();
-        flyway.setDataSource("jdbc:h2:file:./target/foobar", "sa", null);
-        flyway.migrate();
+    public static void main(String[] args) {
+        logger.trace("Запуск приложения");
+
+        ContextDAO contextDAO = new ContextDAO();
+
+        contextDAO.withDataBaseDriver("org.h2.Driver")
+                .withDataBaseUrl("jdbc:h2:file:./src/main/resources/db/Goodline_Programm")
+                .withDataBaseUserName("Maxim")
+                .withDataBasePassword("123");
+
+        logger.trace("Начало миграции");
+        try {
+            Flyway flyway = new Flyway();
+            flyway.setLocations("src/main/resources/db/migration");
+            flyway.setDataSource(contextDAO.getDbUrl(),
+                    contextDAO.getDbUserName(),
+                    contextDAO.getDbPassword());
+            flyway.migrate();
+        } catch (Exception e) {
+            logger.error("Ошибка миграции: " + e.getMessage());
+        }
+
 
         ParseCommLine cmdArgs = new ParseCommLine();
         CommLineArgs arguments = cmdArgs.parse(args);
 
-        logger.traceLogging("Arguments application: \n" + arguments.toString());
+        logger.trace("Arguments application: \n" + arguments.toString());
 
-        ArrayList<Users> users = new ArrayList<>();
-        users.add(new Users("User_Read", "123_r", EncryptedPass.getSalt()));
-        users.add(new Users("User_Write", "123_w", EncryptedPass.getSalt()));
-        users.add(new Users("User_Execute", "123_e", EncryptedPass.getSalt()));
+        try (Connection connection = contextDAO.getConnection()) {
+            logger.trace("Подключение к базе данных установлено");
 
-        users.add(new Users( "jdoe", "sup3rpaZZ", EncryptedPass.getSalt()));
-        users.add(new Users("jrow",  "Qweqrty12", EncryptedPass.getSalt()));
-        users.add(new Users("xxx", "yyy", EncryptedPass.getSalt()));
+            Authentication authentication = new Authentication();
+            Authorization authorization = new Authorization();
 
-        ArrayList<Resources> resources = new ArrayList<>();
-        resources.add(new Resources("User_Read", Roles.READ, "C.R.RR"));
-        resources.add(new Resources("User_Read", Roles.READ, "C.W.WR.R"));
-        resources.add(new Resources("User_Write", Roles.WRITE, "C.W.WR"));
-        resources.add(new Resources("User_Write", Roles.WRITE, "C.R.RR.W"));
-        resources.add(new Resources("User_Execute", Roles.EXECUTE, "C.E.ER"));
+            UsersDAO userDAO = new UsersDAO(connection);
+            ResourceDAO resourceDAO = new ResourceDAO(connection);
+            AccountsDAO accountDAO = new AccountsDAO(connection);
 
-        resources.add(new Resources("jdoe", Roles.READ, "a"));
-        resources.add(new Resources("jdoe", Roles.WRITE, "a.b"));
-        resources.add(new Resources("jrow", Roles.EXECUTE, "a.b.c"));
-        resources.add(new Resources("jdoe", Roles.EXECUTE, "a.bc"));
+            String login = arguments.getLogin();
+            String password = arguments.getPassword();
+            String resource = arguments.getPath();
+            String role = arguments.getRole();
 
-        Users authenticationUser = null;
-        ArrayList<Accounts> accounts = new ArrayList<>();
+            boolean isAuthentication = false;
+            boolean isAuthorization = false;
 
-        if (arguments.isAuthentication()) {
-            authenticationUser = Authentication.logIn(users, arguments.getLogin(), arguments.getPassword());
+            logger.trace("Аутентификация");
+            if (authentication.isAuthentication(userDAO, login, password)) {
+                logger.info("Аутентификация завершена усепшно");
+                isAuthentication = true;
+            }
+
+            logger.trace("Запускается авторизация");
+            if (authorization.isAuthorization(resourceDAO, resource, role, isAuthentication)) {
+                logger.info("Авторизация прошла успешно");
+                isAuthorization = true;
+            }
+
+            logger.trace("Запускается аккаунтинг");
+            Accounting accounting = new Accounting();
+            Accounts account = new Accounts();
+            if (accounting.isAccounting(account, resourceDAO, arguments, isAuthorization)) {
+                accountDAO.addAccountsUser(account);
+                logger.info("Аккаунтинг прошел успешно");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.debug("При подключении к БД произошла ошибка", e);
         }
-        if (arguments.isAuthorization()) {
-            Authorization.checkParam(
-                    authenticationUser,
-                    resources,
-                    arguments.getRole(),
-                    arguments.getPath());
-        }
-        if (arguments.isAccounting()) {
-            accounts.add(new Accounts(
-                    Accounting.isDateValid(arguments.getDateIn()),
-                    Accounting.isDateValid(arguments.getDateOut()),
-                    Accounting.isVolumeValid(arguments.getVolume())));
-        }
+
         System.exit(0);
     }
 }
