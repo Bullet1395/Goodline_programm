@@ -81,7 +81,7 @@ public class ParseCommLine {
         return null;
     }
 
-    void printHelp() {
+    private void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Goodline application", "Справка",
                 options, "...");

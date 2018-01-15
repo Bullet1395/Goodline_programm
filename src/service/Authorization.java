@@ -21,8 +21,8 @@ public class Authorization {
      * @param role - роль из аругментов
      * @return - true, если доступ к ресурсу есть, false - если доступ к ресурсу отсутствует
      */
-    private boolean validAccessToResource(ResourceDAO resourceDAO, String resource, String role) throws SQLException {
-        Resources res = resourceDAO.getResource(resource, role);
+    private boolean validAccessToResource(ResourceDAO resourceDAO, String resource, String role, String login) throws SQLException {
+        Resources res = resourceDAO.getResource(resource, role, login);
         if (res == null) {
             logger.error("Ошибка доступа");
             return false;
@@ -39,13 +39,13 @@ public class Authorization {
      * @param isAuthentication - проверка аутентификации
      * @return - системная ошибка с кодом, либо true если все совпадает
      */
-    public boolean isAuthorization(ResourceDAO resourceDAO, String resource, String role, boolean isAuthentication)
+    public boolean isAuthorization(ResourceDAO resourceDAO, String resource, String role, boolean isAuthentication, String login)
             throws SQLException {
         if ((isAuthentication) && (role != null) && (resource != null)) {
             if (!Roles.isCheckInRole(role)) {
                 System.exit(3);
             }
-            if (!validAccessToResource(resourceDAO, resource, role)) {
+            if (!validAccessToResource(resourceDAO, resource, role, login)) {
                 System.exit(4);
             }
             return true;

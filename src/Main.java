@@ -17,6 +17,21 @@ public class Main {
     public static void main(String[] args) {
         logger.trace("Запуск приложения");
 
+        ParseCommLine cmdArgs = new ParseCommLine();
+        CommLineArgs arguments = cmdArgs.parse(args);
+
+        String buf = "";
+        logger.trace("Arguments application: ");
+        for (String arg: args) {
+            buf += arg + " ";
+        }
+        logger.trace(buf);
+
+        if (args.length == 0) {
+            logger.trace("Аргументов нет");
+            System.exit(0);
+        }
+
         ContextDAO contextDAO = new ContextDAO();
 
         contextDAO.withDataBaseDriver("org.h2.Driver")
@@ -34,17 +49,6 @@ public class Main {
         } catch (Exception e) {
             logger.error("Ошибка миграции: " + e.getMessage());
         }
-
-
-        ParseCommLine cmdArgs = new ParseCommLine();
-        CommLineArgs arguments = cmdArgs.parse(args);
-
-        String buf = new String();
-        logger.trace("Arguments application: ");
-        for (String arg: args) {
-            buf += arg + " ";
-        }
-        logger.trace(buf);
 
         try (Connection connection = contextDAO.getConnection()) {
             logger.trace("Подключение к базе данных установлено");
@@ -71,7 +75,7 @@ public class Main {
             }
 
             logger.trace("Запускается авторизация");
-            if (authorization.isAuthorization(resourceDAO, resource, role, isAuthentication)) {
+            if (authorization.isAuthorization(resourceDAO, resource, role, isAuthentication, login)) {
                 logger.info("Авторизация прошла успешно");
                 isAuthorization = true;
             }

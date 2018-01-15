@@ -20,10 +20,11 @@ public class ResourceDAO {
     }
 
     private final String sqlSelectResource = "SELECT * FROM RESOURCES WHERE" +
+            "(RESOURCES.LOGIN LIKE ?) AND " +
             "(RESOURCES.RESOURCE LIKE ?) AND " +
             "(RESOURCES.ROLE LIKE ?)";
 
-    public Resources getResource(String resource, String role) throws SQLException {
+    public Resources getResource(String resource, String role, String login) throws SQLException {
         String findResource = "";
 
         try {
@@ -32,8 +33,9 @@ public class ResourceDAO {
             for (String res : arrayOfResource) {
                 findResource += res;
                 PreparedStatement statement = connection.prepareStatement(sqlSelectResource);
-                statement.setString(1, findResource);
-                statement.setString(2, role);
+                statement.setString(1, login);
+                statement.setString(2, findResource);
+                statement.setString(3, role);
 
                 ResultSet resultSet = statement.executeQuery();
 
