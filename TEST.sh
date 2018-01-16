@@ -8,8 +8,7 @@ echo $1
 ./RUN.sh "$1"
 RESULT_TEST=$?
 
-if [[ $RESULT_TEST == "$2" ]]
-    echo
+if [[ "$RESULT_TEST" == "$2" ]]
         then
         echo "Тест завершен. Результаты: $2 = $RESULT_TEST"
         TEST_OK=$(( $TEST_OK+1 ))
