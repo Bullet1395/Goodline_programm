@@ -1,7 +1,7 @@
-package DAO;
+package main.DAO;
 
-import domain.Resources;
-import domain.enums.Roles;
+import main.domain.Resources;
+import main.domain.enums.Roles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

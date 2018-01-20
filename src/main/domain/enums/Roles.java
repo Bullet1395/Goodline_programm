@@ -1,8 +1,8 @@
-package domain.enums;
+package main.domain.enums;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.Authentication;
+import main.service.Authentication;
 
 public enum Roles {
     READ,

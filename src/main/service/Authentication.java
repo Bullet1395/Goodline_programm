@@ -1,10 +1,10 @@
-package service;
+package main.service;
 
-import DAO.UsersDAO;
-import domain.Users;
+import main.DAO.UsersDAO;
+import main.domain.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.security.EncryptedPass;
+import main.service.security.EncryptedPass;
 
 import java.sql.SQLException;
 

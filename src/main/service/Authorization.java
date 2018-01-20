@@ -1,14 +1,12 @@
-package service;
+package main.service;
 
-import DAO.ResourceDAO;
-import domain.Resources;
-import domain.Users;
-import domain.enums.Roles;
+import main.DAO.ResourceDAO;
+import main.domain.Resources;
+import main.domain.enums.Roles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class Authorization {
     private static final Logger logger = LogManager.getLogger(Authorization.class.getName());

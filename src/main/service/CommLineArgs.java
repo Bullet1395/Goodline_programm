@@ -1,4 +1,4 @@
-package service;
+package main.service;
 
 public class CommLineArgs {
     private String login;
@@ -70,17 +70,5 @@ public class CommLineArgs {
     CommLineArgs withVolume(String volume) {
         this.volume = volume;
         return this;
-    }
-
-    public boolean isAuthentication(){
-        return ((login != null) && (password != null));
-    }
-
-    public boolean isAuthorization(){
-        return (isAuthentication() && (role != null) && (path != null));
-    }
-
-    public boolean isAccounting() {
-        return (isAuthorization() && (dateIn != null) && (dateOut != null) && (volume != null));
     }
 }

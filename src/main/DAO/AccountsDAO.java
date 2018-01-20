@@ -1,6 +1,6 @@
-package DAO;
+package main.DAO;
 
-import domain.Accounts;
+import main.domain.Accounts;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
