@@ -26,11 +26,6 @@ public class Main {
             logger.log(Level.TRACE, "Аргументы: " + Arrays.toString(args));
         }
 
-        if (args.length == 0) {
-            logger.trace("Аргументов нет");
-            System.exit(0);
-        }
-
         ContextDAO contextDAO = new ContextDAO();
 
         contextDAO.withDataBaseDriver("org.h2.Driver")
@@ -45,12 +40,13 @@ public class Main {
                     contextDAO.getDbUserName(),
                     contextDAO.getDbPassword());
             flyway.migrate();
+            logger.trace("Миграция завершена");
         } catch (Exception e) {
             logger.error("Ошибка миграции: " + e.getMessage());
         }
 
         try (Connection connection = contextDAO.getConnection()) {
-            logger.trace("Подключение к базе данных установлено");
+            logger.trace("Подключение к базе данных: [{}] установлено", contextDAO.getDbUserName());
 
             Authentication authentication = new Authentication();
             Authorization authorization = new Authorization();

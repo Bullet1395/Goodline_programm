@@ -90,6 +90,7 @@ public class ParseCommLine {
     private void checkOptionHelp(String[] args) {
         if (line.hasOption("help") || args.length == 0) {
             printHelp();
+            System.exit(0);
         }
     }
 }

@@ -49,8 +49,7 @@ public class ContextDAO {
         return this;
     }
 
-    public ContextDAO withDataBasePassword(String dataBasePassword) {
+    public void withDataBasePassword(String dataBasePassword) {
         this.dbPassword = dataBasePassword;
-        return this;
     }
 }

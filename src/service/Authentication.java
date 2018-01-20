@@ -21,7 +21,7 @@ public class Authentication {
      */
      public boolean isAuthentication(UsersDAO userDAO, String login, String password) throws SQLException {
         if (!searchUserInDB(userDAO, login)) {
-            logger.error("Пользователь не найден");
+            logger.error("Пользователь [{}] не найден", login);
             System.exit(1);
         }
 
@@ -41,11 +41,7 @@ public class Authentication {
      */
     private boolean searchUserInDB(UsersDAO userDAO, String login) throws SQLException {
         Users user = userDAO.searchUser(login);
-        if (user == null) {
-            logger.error("Пользователь не найден");
-            return false;
-        }
-        return true;
+        return user != null;
     }
 
     /**
