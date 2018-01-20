@@ -1,8 +1,10 @@
 package service;
 
 import DAO.UsersDAO;
+import domain.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import service.security.EncryptedPass;
 
 import java.sql.SQLException;
 
@@ -18,16 +20,50 @@ public class Authentication {
      * @return true, если пользователь аутентифицирован
      */
      public boolean isAuthentication(UsersDAO userDAO, String login, String password) throws SQLException {
-        ContextDB contextDB = new ContextDB();
-        if (!contextDB.searchUserInDB(userDAO, login)) {
+        if (!searchUserInDB(userDAO, login)) {
             logger.error("Пользователь не найден");
             System.exit(1);
         }
 
-        if (!contextDB.validHashPassword(userDAO, login, password)) {
+        if (!validHashPassword(userDAO, login, password)) {
             logger.error("Неверный пароль");
             System.exit(2);
         }
         return true;
+    }
+
+    /**
+     * Поиск пользователя в базе данных
+     *
+     * @param userDAO - пользователь из БД
+     * @param login - пользовательский логин, который считывается с входных аргументов
+     * @return - true, если пользователь найден
+     */
+    private boolean searchUserInDB(UsersDAO userDAO, String login) throws SQLException {
+        Users user = userDAO.searchUser(login);
+        if (user == null) {
+            logger.error("Пользователь не найден");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Проверка пароля пользователя
+     *
+     * @param userDAO   - пользователь из БД
+     * @param login - пользовательский логин, который считывается с входных аргументов
+     * @param password - пользовательская пароль, которая считывается с входных аргументов
+     * @return - true, если хэши паролей совпадают
+     */
+    private boolean validHashPassword(UsersDAO userDAO, String login, String password) throws SQLException {
+        Users user = userDAO.searchUser(login);
+        String hashPassword = EncryptedPass.setPasswordHash(password, user.getSalt());
+        if (user.getPassword().equals(hashPassword)) {
+            return true;
+        }
+
+        logger.error("Хэши не совпадают!");
+        return false;
     }
 }

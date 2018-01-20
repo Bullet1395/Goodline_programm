@@ -4,18 +4,18 @@ TEST_COUNT=19
 RESULT_TEST=0;
 
 test() {
-echo $1
-./RUN.sh "$1"
-RESULT_TEST=$?
+    echo $1
+    ./RUN.sh "$1"
+    RESULT_TEST=$?
 
-if [[ "$RESULT_TEST" == "$2" ]]
-        then
-        echo "Тест завершен. Результаты: $2 = $RESULT_TEST"
-        TEST_OK=$(( $TEST_OK+1 ))
-else
-    echo "Тест провален. Результаты: $2 = $RESULT_TEST"
-    TEST_FAIL=$(( $TEST_FAIL+1 ))
-fi
+    if [[ "$RESULT_TEST" == "$2" ]]
+    then
+      echo "Тест завершен. Результаты: $2 = $RESULT_TEST"
+      TEST_OK=$(( $TEST_OK+1 ))
+    else
+      echo "Тест провален. Результаты: $2 = $RESULT_TEST"
+       TEST_FAIL=$(( $TEST_FAIL+1 ))
+    fi
 }
 
 echo "Параметры тестирования: Нет параметров"

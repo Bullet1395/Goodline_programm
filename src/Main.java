@@ -3,6 +3,7 @@ import DAO.ContextDAO;
 import DAO.ResourceDAO;
 import DAO.UsersDAO;
 import domain.Accounts;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;
@@ -10,6 +11,7 @@ import service.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(UsersDAO.class.getName());
@@ -20,12 +22,9 @@ public class Main {
         ParseCommLine cmdArgs = new ParseCommLine();
         CommLineArgs arguments = cmdArgs.parse(args);
 
-        String buf = "";
-        logger.trace("Arguments application: ");
-        for (String arg: args) {
-            buf += arg + " ";
+        if (logger.isTraceEnabled()) {
+            logger.log(Level.TRACE, "Аргументы: " + Arrays.toString(args));
         }
-        logger.trace(buf);
 
         if (args.length == 0) {
             logger.trace("Аргументов нет");
