@@ -1,6 +1,4 @@
-package domain;
-
-import service.security.EncryptedPass;
+package main.domain;
 
 public class Users {
     private String login;

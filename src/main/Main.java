@@ -1,13 +1,15 @@
-import DAO.AccountsDAO;
-import DAO.ContextDAO;
-import DAO.ResourceDAO;
-import DAO.UsersDAO;
-import domain.Accounts;
+package main;
+
+import main.DAO.AccountsDAO;
+import main.DAO.ContextDAO;
+import main.DAO.ResourceDAO;
+import main.DAO.UsersDAO;
+import main.domain.Accounts;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.flywaydb.core.Flyway;
-import service.*;
+import main.service.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
