@@ -71,7 +71,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>src.main.Main</mainClass>
+                                    <mainClass>src.main.bin.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

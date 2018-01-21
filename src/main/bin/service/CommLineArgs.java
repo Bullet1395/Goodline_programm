@@ -1,4 +1,4 @@
-package main.service;
+package main.bin.service;
 
 public class CommLineArgs {
     private String login;

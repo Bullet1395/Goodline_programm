@@ -1,4 +1,4 @@
-package main.domain;
+package main.bin.domain;
 
 public class Users {
     private String login;
