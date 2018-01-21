@@ -9,4 +9,4 @@ echo Копируем ресурсы в outHand:
 cp -R -v ./src/main/resources/* ./outHand/
 
 echo Сборка проекта в .jar архив
-jar cvmf META-INF/MANIFEST.MF Goodline_programm.jar outHand/ lib/
+jar cvmf META-INF/MANIFEST.MF Goodline_programm.jar -C outHand . -C lib .
