@@ -1,8 +1,8 @@
-package main.bin.service;
+package bin.service;
 
-import main.bin.DAO.ResourceDAO;
-import main.bin.domain.Resources;
-import main.bin.domain.enums.Roles;
+import bin.DAO.ResourceDAO;
+import bin.domain.Resources;
+import bin.domain.enums.Roles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

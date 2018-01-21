@@ -1,6 +1,6 @@
-package main.bin.DAO;
+package bin.DAO;
 
-import main.bin.domain.Users;
+import bin.domain.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

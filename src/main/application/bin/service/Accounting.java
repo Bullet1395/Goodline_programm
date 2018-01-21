@@ -1,6 +1,6 @@
-package main.bin.service;
+package bin.service;
 
-import main.bin.domain.Accounts;
+import bin.domain.Accounts;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

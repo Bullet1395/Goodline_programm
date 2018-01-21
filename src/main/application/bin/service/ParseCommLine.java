@@ -1,4 +1,4 @@
-package main.bin.service;
+package bin.service;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
